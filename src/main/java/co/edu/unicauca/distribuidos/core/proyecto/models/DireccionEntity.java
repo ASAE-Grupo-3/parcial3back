@@ -22,7 +22,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Direcciones")
+@Table(name = "Direccion")
 public class DireccionEntity {
 
 	@Id

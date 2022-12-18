@@ -21,7 +21,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity   
-@Table(name ="Cursos")
+@Table(name ="Curso")
 public class CursoEntity{
 
 
