@@ -67,7 +67,6 @@ public class EstudianteServiceImpl implements IEstudianteService {
 			estudianteDTO = this.modelMapper.map(objEstudianteEntity, EstudianteDTO.class);
 		}
 		
-		
 		return estudianteDTO;
 	}
 

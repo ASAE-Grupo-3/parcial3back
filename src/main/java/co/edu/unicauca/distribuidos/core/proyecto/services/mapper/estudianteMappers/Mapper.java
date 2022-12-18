@@ -19,9 +19,9 @@ public class Mapper {
     @Bean(name = "mapperEstudiante")
     public ModelMapper modelMapperStudent() {
         ModelMapper objMapper = new ModelMapper();
-//        TypeMap<EstudianteEntity, EstudianteDTO> mapa = objMapper.emptyTypeMap(EstudianteEntity.class, EstudianteDTO.class);
-//        mapa.addMappings(n -> n.skip(EstudianteDTO::setObjDireccion)).implicitMappings();
-//        mapa.addMappings(m -> m.skip(EstudianteDTO::setTelefonos)).implicitMappings();
+        TypeMap<EstudianteEntity, EstudianteDTO> mapa = objMapper.emptyTypeMap(EstudianteEntity.class, EstudianteDTO.class);
+        mapa.addMappings(m -> m.skip(EstudianteDTO::setTelefonos)).implicitMappings();
+        mapa.addMappings(n -> n.skip(EstudianteDTO::setObjDireccion)).implicitMappings();
         return objMapper;
     }
 
@@ -44,8 +44,8 @@ public class Mapper {
     @Bean(name = "mapperCurso")
     public ModelMapper modelMapperCurso() {
         ModelMapper objMapper = new ModelMapper();
-//        TypeMap<CursoEntity, CursoDTO> mapa = objMapper.emptyTypeMap(CursoEntity.class, CursoDTO.class);
-//        mapa.addMappings(n -> n.skip(CursoDTO::setObjAsignatura)).implicitMappings();
+        TypeMap<CursoEntity, CursoDTO> mapa = objMapper.emptyTypeMap(CursoEntity.class, CursoDTO.class);
+        mapa.addMappings(n -> n.skip(CursoDTO::setObjAsignatura)).implicitMappings();
         return objMapper;
     }
 }

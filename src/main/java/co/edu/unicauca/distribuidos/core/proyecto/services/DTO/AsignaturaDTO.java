@@ -15,16 +15,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AsignaturaDTO implements Serializable{
+public class AsignaturaDTO {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -7946102287893593415L;
     private Integer idAsignatura;
     private String nombre;
     private List<DocenteDTO> docentes;
     @JsonBackReference
     private List<CursoDTO> cursos;
-    
 }

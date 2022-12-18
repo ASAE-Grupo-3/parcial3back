@@ -4,6 +4,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
@@ -24,14 +26,14 @@ import lombok.Setter;
 public class DireccionEntity {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idEstudiante;
 	@Column(name="numeroTelefono", nullable = false, length = 150)
 	private String numeroTelefono;
 	@Column(name="tipoTelefono", nullable = false, length = 150)
 	private String tipoTelefono;
 
-	@OneToOne(optional = false, cascade = { CascadeType.ALL },fetch = FetchType.LAZY)
-	@MapsId
+	@OneToOne(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
 	@JoinColumn(name = "idPersona", nullable = false)
 	private EstudianteEntity objEstudiante;
 

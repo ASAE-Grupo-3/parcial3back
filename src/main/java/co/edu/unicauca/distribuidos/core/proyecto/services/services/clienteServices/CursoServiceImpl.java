@@ -61,7 +61,7 @@ public class CursoServiceImpl implements ICursoService {
 	@Override
 	@Transactional()
 	public CursoDTO save(CursoDTO cursoDTO) {
-		
+
 		AsignaturaEntity asignatura = this.servicioAsignatura.findById(cursoDTO.getObjAsignatura().getIdAsignatura()).orElse(null);
 		CursoDTO cursoRespuesta = null;
 		if (cursoDTO.getObjAsignatura()!=null && asignatura!=null) {
@@ -73,7 +73,6 @@ public class CursoServiceImpl implements ICursoService {
 			
 			CursoEntity objCursoEntity = this.servicioAccesoBaseDatos.save(cursoEntity);
 			cursoRespuesta = this.modelMapper.map(objCursoEntity, CursoDTO.class);
-			cursoRespuesta.getObjAsignatura().setDocentes(new ArrayList<>());
 		}
 		
 		return cursoRespuesta;

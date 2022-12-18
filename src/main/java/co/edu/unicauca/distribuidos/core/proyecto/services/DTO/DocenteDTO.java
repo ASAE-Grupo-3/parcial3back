@@ -1,6 +1,5 @@
 package co.edu.unicauca.distribuidos.core.proyecto.services.DTO;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,12 +9,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Setter @Getter
-public class DocenteDTO extends PersonaDTO implements Serializable{
-
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5795694815991419355L;
+public class DocenteDTO extends PersonaDTO {
+    
 	private String universidad;
     private String tipoDocente;
     private Float salario;

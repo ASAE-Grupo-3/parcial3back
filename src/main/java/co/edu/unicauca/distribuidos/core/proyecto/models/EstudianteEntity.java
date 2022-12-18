@@ -24,7 +24,7 @@ public class EstudianteEntity extends PersonaEntity{
     @OneToOne(cascade = { CascadeType.ALL },fetch = FetchType.EAGER, mappedBy = "objEstudiante")
 	private DireccionEntity objDireccion; 
 
-    @OneToMany(cascade = { CascadeType.ALL },fetch = FetchType.EAGER, mappedBy = "objEstudiante")
+    @OneToMany(cascade = { CascadeType.ALL },fetch = FetchType.LAZY, mappedBy = "objEstudiante")
 	private List<TelefonoEntity> telefonos;
 
     

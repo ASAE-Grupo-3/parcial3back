@@ -34,7 +34,7 @@ public class TelefonoEntity {
     @Column(name="numero", nullable = false, length = 150)
     private String numero;
 
-    @ManyToOne(cascade = { CascadeType.ALL },fetch = FetchType.LAZY)
+    @ManyToOne(cascade = { CascadeType.ALL },fetch = FetchType.EAGER)
     @JoinColumn(name = "idPersona", nullable = false)
 	private EstudianteEntity objEstudiante;
 }

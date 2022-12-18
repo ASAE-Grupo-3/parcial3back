@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Setter @Getter
-public class EstudianteDTO extends PersonaDTO{
+public class EstudianteDTO extends PersonaDTO {
     private Date fechaIngreso;
     
 	private DireccionDTO objDireccion;
