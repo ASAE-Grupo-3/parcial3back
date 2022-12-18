@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import javax.persistence.Column;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @MappedSuperclass
 public class PersonaEntity {
 
@@ -32,11 +35,4 @@ public class PersonaEntity {
 	@Column(name="apellidos", nullable = false, length = 150)
 	private String apellidos;
 
-	public PersonaEntity(String noIdentificacion, String tipoIdentificacion, String nombres, String apellidos) {
-		super();
-		this.noIdentificacion = noIdentificacion;
-		this.tipoIdentificacion = tipoIdentificacion;
-		this.nombres = nombres;
-		this.apellidos = apellidos;
-	}
 }

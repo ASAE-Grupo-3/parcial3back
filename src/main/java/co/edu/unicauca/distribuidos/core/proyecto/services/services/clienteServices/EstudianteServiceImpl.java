@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import co.edu.unicauca.distribuidos.core.proyecto.models.EstudianteEntity;
-import co.edu.unicauca.distribuidos.core.proyecto.models.DireccionEntity;
 import co.edu.unicauca.distribuidos.core.proyecto.repositories.EstudianteRepository;
 import co.edu.unicauca.distribuidos.core.proyecto.services.DTO.EstudianteDTO;
 
@@ -40,6 +39,7 @@ public class EstudianteServiceImpl implements IEstudianteService {
 	public EstudianteDTO findById(Integer id) {
 		System.out.println("antes de la consulta");
 		Optional<EstudianteEntity> optional = this.servicioAccesoBaseDatos.findById(id);
+		
 		EstudianteDTO estudianteDTO = null;
 		if (optional.isPresent()) {
 			
@@ -59,7 +59,7 @@ public class EstudianteServiceImpl implements IEstudianteService {
 		EstudianteDTO estudianteDTO = null;
 		if (!this.servicioAccesoBaseDatos.findBynoIdentificacion(estudiante.getNoIdentificacion()).isPresent()) {
 			EstudianteEntity EstudianteEntity = this.modelMapper.map(estudiante, EstudianteEntity.class);
-			EstudianteEntity.getObjDireccion().setObjEstudiante(EstudianteEntity);
+//			EstudianteEntity.getObjDireccion().setObjEstudiante(EstudianteEntity);
 
 			EstudianteEntity.getTelefonos().forEach(objTelefono -> objTelefono.setObjEstudiante(EstudianteEntity));
 
@@ -74,7 +74,7 @@ public class EstudianteServiceImpl implements IEstudianteService {
 	@Transactional(readOnly = false)
 	public EstudianteDTO update(Integer id, EstudianteDTO objEstudianteConDatosNuevos) {
 		EstudianteEntity EstudianteEntity = this.modelMapper.map(objEstudianteConDatosNuevos, EstudianteEntity.class);
-		EstudianteEntity.getObjDireccion().setObjEstudiante(EstudianteEntity);
+//		EstudianteEntity.getObjDireccion().setObjEstudiante(EstudianteEntity);
 
 		EstudianteEntity.getTelefonos().forEach(objTelefono -> objTelefono.setObjEstudiante(EstudianteEntity));
 		

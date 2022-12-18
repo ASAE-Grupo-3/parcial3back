@@ -20,8 +20,8 @@ public class Mapper {
     public ModelMapper modelMapperStudent() {
         ModelMapper objMapper = new ModelMapper();
         TypeMap<EstudianteEntity, EstudianteDTO> mapa = objMapper.emptyTypeMap(EstudianteEntity.class, EstudianteDTO.class);
+        mapa.addMappings(m -> m.skip(EstudianteDTO::setObjDireccion)).implicitMappings();
         mapa.addMappings(m -> m.skip(EstudianteDTO::setTelefonos)).implicitMappings();
-        mapa.addMappings(n -> n.skip(EstudianteDTO::setObjDireccion)).implicitMappings();
         return objMapper;
     }
 

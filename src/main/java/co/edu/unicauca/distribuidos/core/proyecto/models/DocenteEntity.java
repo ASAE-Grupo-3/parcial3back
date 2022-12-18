@@ -11,11 +11,14 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Setter @Getter
+@AllArgsConstructor
 @Table(name = "Docente")
 public class DocenteEntity extends PersonaEntity{
 
@@ -32,18 +35,6 @@ public class DocenteEntity extends PersonaEntity{
 	@JoinTable(name="Docente_Asignatura", joinColumns = @JoinColumn(name="idPersona"), inverseJoinColumns = @JoinColumn(name="idAsignatura"))
 	private List<AsignaturaEntity> Asignaturas = new ArrayList<>();
     
-    public DocenteEntity()
-    {
-        super();
-    }
-
-    public DocenteEntity(String  noIdentificacion, String tipoIdentificacion, String nombres, String apellidos, String universidad, String tipoDocente, Float salario)
-    {
-        super(noIdentificacion, tipoIdentificacion, nombres,  apellidos);
-        this.universidad = universidad;
-        this.tipoDocente = tipoDocente;
-        this.salario = salario;
-    }
 
     public void addAsignatura(AsignaturaEntity asignatura){
         Asignaturas.add(asignatura);
