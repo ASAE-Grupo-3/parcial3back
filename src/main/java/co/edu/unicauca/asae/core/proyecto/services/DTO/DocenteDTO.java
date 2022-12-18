@@ -5,30 +5,21 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter @Getter
+@Setter 
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class DocenteDTO extends PersonaDTO {
     
 	private String universidad;
     private String tipoDocente;
     private Float salario;
     @JsonIgnore
-	private List<AsignaturaDTO> Asignaturas = new ArrayList<>();
-    
-    public DocenteDTO()
-    {
-        super();
-    }
-
-    public DocenteDTO(String  noIdentificacion, String tipoIdentificacion, String nombres, String apellidos, String universidad, String tipoDocente, Float salario)
-    {
-        super(noIdentificacion, tipoIdentificacion, nombres,  apellidos);
-        this.universidad = universidad;
-        this.tipoDocente = tipoDocente;
-        this.salario = salario;
-    }
-    
+	private List<AsignaturaDTO> Asignaturas = new ArrayList<>();    
     
 }
