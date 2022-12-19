@@ -14,10 +14,13 @@ import javax.persistence.JoinColumn;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Setter @Getter
+@Setter 
+@Getter
+@NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Docente")
 public class DocenteEntity extends PersonaEntity{
@@ -33,11 +36,11 @@ public class DocenteEntity extends PersonaEntity{
 
     @ManyToMany(cascade = {CascadeType.PERSIST},fetch = FetchType.LAZY)
 	@JoinTable(name="Docente_Asignatura", joinColumns = @JoinColumn(name="idPersona"), inverseJoinColumns = @JoinColumn(name="idAsignatura"))
-	private List<AsignaturaEntity> Asignaturas = new ArrayList<>();
+	private List<AsignaturaEntity> asignaturas = new ArrayList<>();
     
-
-    public void addAsignatura(AsignaturaEntity asignatura){
-        Asignaturas.add(asignatura);
-    }
+//
+//    public void addAsignatura(AsignaturaEntity asignatura){
+//        asignaturas.add(asignatura);
+//    }
 
 }

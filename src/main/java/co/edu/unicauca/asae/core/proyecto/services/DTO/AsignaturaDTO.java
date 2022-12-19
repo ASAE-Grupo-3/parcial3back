@@ -1,10 +1,11 @@
 package co.edu.unicauca.asae.core.proyecto.services.DTO;
 
-import java.io.Serializable;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,8 +19,13 @@ import lombok.Setter;
 public class AsignaturaDTO {
 
     private Integer idAsignatura;
+	@NotNull(message = "{asignatura.nombre.null}")
+	@NotEmpty(message = "{asignatura.nombre.empty}")
+    @Size(min=5, max = 25, message = "{asignatura.nombre.size}")
     private String nombre;
+	
+	@JsonIgnoreProperties(value="asignaturas")
     private List<DocenteDTO> docentes;
-    @JsonBackReference
+	@JsonIgnoreProperties(value="objAsignatura")
     private List<CursoDTO> cursos;
 }
