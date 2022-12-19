@@ -4,6 +4,8 @@ package co.edu.unicauca.asae.core.proyecto.controllers;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Negative;
+import javax.validation.constraints.Positive;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -34,7 +36,7 @@ public class EstudianteRestController {
 	}
 
 	@GetMapping("/estudiantes/{id}")
-	public EstudianteDTO show(@PathVariable Integer id) {
+	public EstudianteDTO show(@Positive(message = "{consultar.recurso.identificacion}") @PathVariable Integer id) {
 		EstudianteDTO objEstudiante = null;
 		objEstudiante = estudianteService.findById(id);
 		return objEstudiante;

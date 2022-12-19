@@ -2,8 +2,10 @@ package co.edu.unicauca.asae.core.proyecto.services.DTO;
 
 
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NegativeOrZero;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,9 +30,11 @@ public class PersonaDTO {
 	private String tipoIdentificacion;
 	@NotNull(message = "{estudiante.nombres.null}")
 	@NotEmpty(message = "{estudiante.nombres.empty}")
+	@Size(min=3, max = 50, message = "{estudiante.nombres.size}")
 	private String nombres;
 	@NotNull(message = "{estudiante.apellidos.null}")
 	@NotEmpty(message = "{estudiante.apellidos.empty}")
+	@Size(min=3, max = 50, message = "{estudiante.apellidos.size}")
 	private String apellidos;
 	
 }
