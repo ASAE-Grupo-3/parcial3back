@@ -2,7 +2,10 @@ package co.edu.unicauca.asae.core.proyecto.controllers;
 
 import java.util.List;
 
+import javax.validation.constraints.Positive;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +20,7 @@ import co.edu.unicauca.asae.core.proyecto.services.services.clienteServices.ICur
 
 @RestController
 @RequestMapping("/api")
+@Validated
 public class CursoRestController {
 
     @Autowired
@@ -28,7 +32,7 @@ public class CursoRestController {
 	}
 
 	@GetMapping("/cursos/{id}")
-	public CursoDTO show(@PathVariable Integer id) {
+	public CursoDTO show(@Positive(message = "{consultar.recurso.identificacion}") @PathVariable Integer id) {
 		CursoDTO objCurso = null;
 		objCurso = CursoService.findById(id);
 		return objCurso;
