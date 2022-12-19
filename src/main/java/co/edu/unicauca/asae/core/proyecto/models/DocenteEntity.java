@@ -38,9 +38,9 @@ public class DocenteEntity extends PersonaEntity{
 	@JoinTable(name="Docente_Asignatura", joinColumns = @JoinColumn(name="idPersona"), inverseJoinColumns = @JoinColumn(name="idAsignatura"))
 	private List<AsignaturaEntity> asignaturas = new ArrayList<>();
     
-//
-//    public void addAsignatura(AsignaturaEntity asignatura){
-//        asignaturas.add(asignatura);
-//    }
+
+    public void addAsignatura(AsignaturaEntity asignatura){
+        asignaturas.add(asignatura);
+    }
 
 }

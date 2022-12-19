@@ -59,7 +59,7 @@ public class AsignaturaServiceImpl implements IAsignaturaService{
         	
         	asignaturaDTO.setIdAsignatura(asignaturaSave.getIdAsignatura());
         	AsignaturaEntity asignaturaEntity = this.modelMapper.map(asignaturaDTO, AsignaturaEntity.class);
-//            asignaturaEntity.getDocentes().forEach(objDocente -> objDocente.addAsignatura(asignaturaEntity));
+            asignaturaEntity.getDocentes().forEach(objDocente -> objDocente.addAsignatura(asignaturaEntity));
             asignaturaEntity.getCursos().forEach(objCurso -> objCurso.setObjAsignatura(asignaturaEntity));
             
 

@@ -40,6 +40,6 @@ public class AsignaturaEntity{
 	private List<DocenteEntity> docentes  = new ArrayList<>();
 
 	@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "objAsignatura")
-	private List<CursoEntity> Cursos  = new ArrayList<>();
+	private List<CursoEntity> cursos  = new ArrayList<>();
 
 }
