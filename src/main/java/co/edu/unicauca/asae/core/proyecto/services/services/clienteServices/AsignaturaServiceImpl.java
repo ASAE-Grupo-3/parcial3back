@@ -17,68 +17,68 @@ import co.edu.unicauca.asae.core.proyecto.services.DTO.AsignaturaDTO;
 import co.edu.unicauca.asae.core.proyecto.services.DTO.CursoDTO;
 
 @Service
-public class AsignaturaServiceImpl implements IAsignaturaService{
+public class AsignaturaServiceImpl implements IAsignaturaService {
 
-    @Autowired
-    private AsignaturaRepository servicioAccesoBaseDatos;
+	@Autowired
+	private AsignaturaRepository servicioAccesoBaseDatos;
 
-    @Autowired
-    @Qualifier("mapperAsignatura")
-    ModelMapper modelMapper;
+	@Autowired
+	@Qualifier("mapperAsignatura")
+	ModelMapper modelMapper;
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<AsignaturaDTO> findAll() {
-        Iterable<AsignaturaEntity> asignaturasEntity = this.servicioAccesoBaseDatos.findAll();
-		System.out.println("antes de la consulta"+ asignaturasEntity);	
-		List<AsignaturaDTO> asignaturaDTO = this.modelMapper.map(asignaturasEntity, new TypeToken<List<AsignaturaDTO>>() {
-		}.getType());
+	@Override
+	@Transactional(readOnly = true)
+	public List<AsignaturaDTO> findAll() {
+		Iterable<AsignaturaEntity> asignaturasEntity = this.servicioAccesoBaseDatos.findAll();
+		System.out.println("antes de la consulta" + asignaturasEntity);
+		List<AsignaturaDTO> asignaturaDTO = this.modelMapper.map(asignaturasEntity,
+				new TypeToken<List<AsignaturaDTO>>() {
+				}.getType());
 		return asignaturaDTO;
-    }
+	}
 
-    @Override
-    @Transactional(readOnly = true)
-    public AsignaturaDTO findById(Integer id) {
-        Optional<AsignaturaEntity> optional = this.servicioAccesoBaseDatos.findById(id);
+	@Override
+	@Transactional(readOnly = true)
+	public AsignaturaDTO findById(Integer id) {
+		Optional<AsignaturaEntity> optional = this.servicioAccesoBaseDatos.findById(id);
 		AsignaturaEntity user = optional.get();
 		System.out.println("antes de la consulta");
 		AsignaturaDTO asignaturaDTO = this.modelMapper.map(user, AsignaturaDTO.class);
 		return asignaturaDTO;
-    }
+	}
 
-    @Override
-    @Transactional
-    public AsignaturaDTO save(AsignaturaDTO asignaturaDTO) {
-        AsignaturaDTO objasignaturaDTO = null;
-        if(asignaturaDTO.getCursos().size() > 0 && asignaturaDTO.getDocentes().size() >= 2){
-        	
-            
-        	AsignaturaEntity asignaturaAux = new AsignaturaEntity();
-        	asignaturaAux.setNombre(asignaturaDTO.getNombre());
-        	AsignaturaEntity asignaturaSave = servicioAccesoBaseDatos.save(asignaturaAux);
-        	
-        	asignaturaDTO.setIdAsignatura(asignaturaSave.getIdAsignatura());
-        	AsignaturaEntity asignaturaEntity = this.modelMapper.map(asignaturaDTO, AsignaturaEntity.class);
-            asignaturaEntity.getDocentes().forEach(objDocente -> objDocente.addAsignatura(asignaturaEntity));
-            asignaturaEntity.getCursos().forEach(objCurso -> objCurso.setObjAsignatura(asignaturaEntity));
-            
+	@Override
+	@Transactional
+	public AsignaturaDTO save(AsignaturaDTO asignaturaDTO) {
+		AsignaturaDTO objasignaturaDTO = null;
+		if (asignaturaDTO.getCursos().size() > 0 && asignaturaDTO.getDocentes().size() >= 2) {
 
-            AsignaturaEntity objAsignaturaEntity = servicioAccesoBaseDatos.save(asignaturaEntity);
-            objasignaturaDTO = this.modelMapper.map(objAsignaturaEntity, AsignaturaDTO.class);
-        }
-        return objasignaturaDTO;
-    }
+//        	AsignaturaEntity asignaturaAux = new AsignaturaEntity();
+//        	asignaturaAux.setNombre(asignaturaDTO.getNombre());
+//        	AsignaturaEntity asignaturaSave = servicioAccesoBaseDatos.save(asignaturaAux);
+//        	
+//        	asignaturaDTO.setIdAsignatura(asignaturaSave.getIdAsignatura());
+			AsignaturaEntity asignaturaEntity = this.modelMapper.map(asignaturaDTO, AsignaturaEntity.class);
+//			asignaturaEntity.getDocentes().forEach(objDocente -> objDocente.addAsignatura(asignaturaEntity));
+//			asignaturaEntity.getDocentes().forEach(objDocente -> objDocente.getAsignaturas().add(asignaturaEntity));
+			asignaturaEntity.getCursos().forEach(objCurso -> objCurso.setObjAsignatura(asignaturaEntity));
 
-    @Override
-    public AsignaturaDTO update(Integer id, AsignaturaDTO asignaturaDTO) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+			AsignaturaEntity objAsignaturaEntity = servicioAccesoBaseDatos.save(asignaturaEntity);
+			objasignaturaDTO = this.modelMapper.map(objAsignaturaEntity, AsignaturaDTO.class);
+		}
+		return objasignaturaDTO;
+	}
 
-    @Override
-    public boolean delete(Integer id) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-    
+	@Override
+	public AsignaturaDTO update(Integer id, AsignaturaDTO asignaturaDTO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delete(Integer id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

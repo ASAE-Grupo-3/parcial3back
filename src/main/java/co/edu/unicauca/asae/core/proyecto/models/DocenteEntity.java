@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.JoinColumn;
 
 import lombok.AllArgsConstructor;
@@ -34,8 +35,9 @@ public class DocenteEntity extends PersonaEntity{
     @Column(name="salario", nullable = false, length = 150)
     private Float salario;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST},fetch = FetchType.LAZY)
-	@JoinTable(name="Docente_Asignatura", joinColumns = @JoinColumn(name="idPersona"), inverseJoinColumns = @JoinColumn(name="idAsignatura"))
+    @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@JoinTable(name="Docente_Asignatura", joinColumns = @JoinColumn(name="idPersona"), inverseJoinColumns = @JoinColumn(name="idAsignatura"),
+	uniqueConstraints = {@UniqueConstraint(columnNames = { "idPersona", "idAsignatura" })})
 	private List<AsignaturaEntity> asignaturas = new ArrayList<>();
     
 

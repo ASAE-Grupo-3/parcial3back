@@ -33,9 +33,9 @@ public class CursoEntity{
     private String nombre;
     
     @Column(name="periodo", nullable = false, length = 150)
-    private String periodo;
+    private Integer periodo;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name="idAsignatura", nullable=false)
     private AsignaturaEntity objAsignatura;
 

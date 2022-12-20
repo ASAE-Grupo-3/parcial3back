@@ -37,7 +37,6 @@ public class CursoServiceImpl implements ICursoService {
 		Iterable<CursoEntity> cursosEntity = this.servicioAccesoBaseDatos.findAll();
 		System.out.println("antes de la consulta"+ cursosEntity);	
 		List<CursoDTO> cursosDTO = this.modelMapper.map(cursosEntity, new TypeToken<List<CursoDTO>>() {}.getType());
-//		cursosDTO.forEach(t->t.getObjAsignatura().setDocentes(new ArrayList<>()));
 		return cursosDTO;
 	}
 
@@ -51,7 +50,6 @@ public class CursoServiceImpl implements ICursoService {
 			CursoEntity curso = optional.get();
 			
 			cursoDTO = this.modelMapper.map(curso, CursoDTO.class);
-			cursoDTO.getObjAsignatura().setDocentes(new ArrayList<>());
 		}
 		
 		return cursoDTO;

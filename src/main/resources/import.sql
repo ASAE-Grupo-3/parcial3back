@@ -1,11 +1,11 @@
-INSERT INTO `estudiante` (`noIdentificacion`, `tipoIdentificacion`, `nombres`, `apellidos`, `fechaIngreso`) VALUES ('1111', 'CC', 'Juan', 'perez', '2022-11-09 00:00:00');
-INSERT INTO `estudiante` (`idPersona`, `apellidos`, `noIdentificacion`, `nombres`, `tipoIdentificacion`, `fechaIngreso`) VALUES (NULL, 'Solarte', '1061813423', 'Juan', 'CC', '2022-11-28 01:51:17.000000');
-INSERT INTO `estudiante` (`idPersona`, `apellidos`, `noIdentificacion`, `nombres`, `tipoIdentificacion`, `fechaIngreso`) VALUES (NULL, 'Marino', '1061818923', 'Clouse', 'CC', '2022-11-28 01:51:17.000000');
-INSERT INTO `estudiante` (`idPersona`, `apellidos`, `noIdentificacion`, `nombres`, `tipoIdentificacion`, `fechaIngreso`) VALUES (NULL, 'Melina', '10618143923', 'Andrea', 'CC', '2022-11-28 01:51:17.000000');
-INSERT INTO `estudiante` (`idPersona`, `apellidos`, `noIdentificacion`, `nombres`, `tipoIdentificacion`, `fechaIngreso`) VALUES (NULL, 'Medina', '10618134323', 'Jiliana', 'CC', '2022-11-28 01:51:17.000000');
-INSERT INTO `estudiante` (`idPersona`, `apellidos`, `noIdentificacion`, `nombres`, `tipoIdentificacion`, `fechaIngreso`) VALUES (NULL, 'Andrade', '4324234444', 'Melissa', 'CC', '2022-11-28 01:51:17.000000');
-INSERT INTO `estudiante` (`idPersona`, `apellidos`, `noIdentificacion`, `nombres`, `tipoIdentificacion`, `fechaIngreso`) VALUES (NULL, 'Diaz', '1061814323', 'Luis', 'CC', '2022-11-28 01:51:17.000000');
-INSERT INTO `estudiante` (`idPersona`, `apellidos`, `noIdentificacion`, `nombres`, `tipoIdentificacion`, `fechaIngreso`) VALUES (NULL, 'Andrade', '432424433', 'Melissa', 'CC', '2022-11-28 01:51:17.000000');
+INSERT INTO `estudiante` (`noIdentificacion`, `tipoIdentificacion`, `nombres`, `apellidos`, `fechaIngreso`, `correo`) VALUES ('1111', 'CC', 'Juan', 'perez', '2022-11-09 00:00:00','juan@gmail.com');
+INSERT INTO `estudiante` (`idPersona`, `apellidos`, `noIdentificacion`, `nombres`, `tipoIdentificacion`, `fechaIngreso`, `correo`) VALUES (NULL, 'Solarte', '1061813423', 'Juan', 'CC', '2022-11-28 01:51:17.000000','solarte@gmail.com');
+INSERT INTO `estudiante` (`idPersona`, `apellidos`, `noIdentificacion`, `nombres`, `tipoIdentificacion`, `fechaIngreso`, `correo`) VALUES (NULL, 'Marino', '1061818923', 'Clouse', 'CC', '2022-11-28 01:51:17.000000','marino@gmail.com');
+INSERT INTO `estudiante` (`idPersona`, `apellidos`, `noIdentificacion`, `nombres`, `tipoIdentificacion`, `fechaIngreso`, `correo`) VALUES (NULL, 'Melina', '10618143923', 'Andrea', 'CC', '2022-11-28 01:51:17.000000','melina@gmail.com');
+INSERT INTO `estudiante` (`idPersona`, `apellidos`, `noIdentificacion`, `nombres`, `tipoIdentificacion`, `fechaIngreso`, `correo`) VALUES (NULL, 'Medina', '10618134323', 'Jiliana', 'CC', '2022-11-28 01:51:17.000000','medina@gmail.com');
+INSERT INTO `estudiante` (`idPersona`, `apellidos`, `noIdentificacion`, `nombres`, `tipoIdentificacion`, `fechaIngreso`, `correo`) VALUES (NULL, 'Andrade', '4324234444', 'Melissa', 'CC', '2022-11-28 01:51:17.000000','andrade@gmail.com');
+INSERT INTO `estudiante` (`idPersona`, `apellidos`, `noIdentificacion`, `nombres`, `tipoIdentificacion`, `fechaIngreso`, `correo`) VALUES (NULL, 'Diaz', '1061814323', 'Luis', 'CC', '2022-11-28 01:51:17.000000','diaz@gmail.com');
+INSERT INTO `estudiante` (`idPersona`, `apellidos`, `noIdentificacion`, `nombres`, `tipoIdentificacion`, `fechaIngreso`, `correo`) VALUES (NULL, 'Andrade', '432424433', 'Melissa', 'CC', '2022-11-28 01:51:17.000000','andrade@gmail.com');
 
 
 
@@ -33,7 +33,7 @@ INSERT INTO `asignatura` (`idAsignatura`, `nombre`) VALUES (null, 'Ingeniería d
 INSERT INTO `docente_asignatura`(`idPersona`, `idAsignatura`) VALUES(1, 1);
 INSERT INTO `docente_asignatura` (`idPersona`, `idAsignatura`) VALUES (2, 2); 
 
-INSERT INTO `curso` (`idCurso`, `nombre`, `periodo`, `idAsignatura`) VALUES (null, 'B', '2022-2',1); 
-INSERT INTO `curso` (`idCurso`, `nombre`, `periodo`, `idAsignatura`) VALUES (null, 'A', '2022-2',2); 
+INSERT INTO `curso` (`idCurso`, `nombre`, `periodo`, `idAsignatura`) VALUES (null, 'B', 1,1); 
+INSERT INTO `curso` (`idCurso`, `nombre`, `periodo`, `idAsignatura`) VALUES (null, 'A', 2,2); 
 
 

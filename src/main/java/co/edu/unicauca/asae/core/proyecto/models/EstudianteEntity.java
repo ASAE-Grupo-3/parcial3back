@@ -23,6 +23,9 @@ import lombok.Setter;
 public class EstudianteEntity extends PersonaEntity{
     @Column(name="fechaIngreso", nullable = false)
     private Date fechaIngreso;
+    
+    @Column(name="correo", nullable = false)
+    private String correo;
 
     @OneToOne(optional = false, cascade = { CascadeType.ALL },mappedBy = "objEstudiante",fetch = FetchType.LAZY)
     private DireccionEntity objDireccion;

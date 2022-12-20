@@ -13,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,6 +26,10 @@ public class DocenteServiceImpl implements IDocenteService {
 	@Qualifier("mapperDocente")
 	private ModelMapper modelMapper;
 
+	@Autowired
+	@Qualifier("messageResourceSB")
+	MessageSource messageSource;
+	
 	@Override
 	@Transactional(readOnly = true)
 	public List<DocenteDTO> findAll() {

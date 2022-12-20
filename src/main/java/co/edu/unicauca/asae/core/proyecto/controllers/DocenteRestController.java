@@ -3,6 +3,7 @@ package co.edu.unicauca.asae.core.proyecto.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class DocenteRestController {
 	}
 
 	@PostMapping("/docentes")
-	public DocenteDTO create(@RequestBody DocenteDTO cliente) {
+	public DocenteDTO create(@Valid @RequestBody DocenteDTO cliente) {
 		DocenteDTO objDocente = null;
 		objDocente = docenteService.save(cliente);
 		return objDocente;

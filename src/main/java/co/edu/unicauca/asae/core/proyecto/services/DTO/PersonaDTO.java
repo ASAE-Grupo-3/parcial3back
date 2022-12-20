@@ -2,7 +2,6 @@ package co.edu.unicauca.asae.core.proyecto.services.DTO;
 
 
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NegativeOrZero;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,8 +18,6 @@ import lombok.Setter;
 @MappedSuperclass
 public class PersonaDTO {
 
-	
-//	@Size(min = 5, max = 45, message = "la cantidad de caracteres del nombre debe estar entre 5 y 45")
 	private Integer idPersona;
 	@NotNull(message = "{estudiante.identificacion.null}")
 	@NotEmpty(message = "{estudiante.identificacion.empty}")

@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,11 +36,12 @@ public class AsignaturaEntity{
 	@Column(name = "nombre", nullable = false, length = 150)
 	private String nombre;
 
-	@ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
-	@JoinTable(name = "Docente_Asignatura", joinColumns = @JoinColumn(name = "idAsignatura"), inverseJoinColumns = @JoinColumn(name = "idPersona"))
+	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+	@JoinTable(name = "Docente_Asignatura", joinColumns = @JoinColumn(name = "idAsignatura"), inverseJoinColumns = @JoinColumn(name = "idPersona"),
+			uniqueConstraints = {@UniqueConstraint(columnNames = { "idPersona", "idAsignatura" })})
 	private List<DocenteEntity> docentes  = new ArrayList<>();
 
-	@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "objAsignatura")
+	@OneToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER, mappedBy = "objAsignatura")
 	private List<CursoEntity> cursos  = new ArrayList<>();
 
 }
