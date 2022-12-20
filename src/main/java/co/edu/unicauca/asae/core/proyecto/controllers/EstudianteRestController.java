@@ -4,7 +4,6 @@ package co.edu.unicauca.asae.core.proyecto.controllers;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Negative;
 import javax.validation.constraints.Positive;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +49,7 @@ public class EstudianteRestController {
 	}
 
 	@PutMapping("/estudiantes/{id}")
-	public EstudianteDTO update(@RequestBody EstudianteDTO estudiante, @PathVariable Integer id) {
+	public EstudianteDTO update(@Valid @RequestBody EstudianteDTO estudiante, @PathVariable Integer id) {
 		EstudianteDTO objEstudiante = null;
 		System.out.println("actualizando cliente");
 		EstudianteDTO EstudianteActual = estudianteService.findById(id);

@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadYaExisteException;
 import co.edu.unicauca.asae.core.proyecto.models.EstudianteEntity;
 import co.edu.unicauca.asae.core.proyecto.repositories.EstudianteRepository;
 import co.edu.unicauca.asae.core.proyecto.services.DTO.EstudianteDTO;
@@ -63,15 +64,19 @@ public class EstudianteServiceImpl implements IEstudianteService {
 	public EstudianteDTO save(EstudianteDTO estudiante) {
 
 		EstudianteDTO estudianteDTO = null;
-		if (!this.servicioAccesoBaseDatos.findBynoIdentificacion(estudiante.getNoIdentificacion()).isPresent()) {
-			EstudianteEntity EstudianteEntity = this.modelMapper.map(estudiante, EstudianteEntity.class);
-			EstudianteEntity.getObjDireccion().setObjEstudiante(EstudianteEntity);
-
-			EstudianteEntity.getTelefonos().forEach(objTelefono -> objTelefono.setObjEstudiante(EstudianteEntity));
-
-			EstudianteEntity objEstudianteEntity = this.servicioAccesoBaseDatos.save(EstudianteEntity);
-			estudianteDTO = this.modelMapper.map(objEstudianteEntity, EstudianteDTO.class);
+		if (this.servicioAccesoBaseDatos.findBynoIdentificacion(estudiante.getNoIdentificacion()).isPresent()) {
+			EntidadYaExisteException objExcepcion = new EntidadYaExisteException("Estudiante con número Id: "
+					+ estudiante.getNoIdentificacion()+" existe en la Base De Datos.");
+			throw objExcepcion;
 		}
+		
+		EstudianteEntity EstudianteEntity = this.modelMapper.map(estudiante, EstudianteEntity.class);
+		EstudianteEntity.getObjDireccion().setObjEstudiante(EstudianteEntity);
+
+		EstudianteEntity.getTelefonos().forEach(objTelefono -> objTelefono.setObjEstudiante(EstudianteEntity));
+
+		EstudianteEntity objEstudianteEntity = this.servicioAccesoBaseDatos.save(EstudianteEntity);
+		estudianteDTO = this.modelMapper.map(objEstudianteEntity, EstudianteDTO.class);
 		
 		return estudianteDTO;
 	}
