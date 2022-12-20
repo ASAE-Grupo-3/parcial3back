@@ -17,6 +17,7 @@ import lombok.Setter;
 public class TelefonoDTO {
 
     private Integer idTelefono;
+    @NotNull(message = "{telefono.tipo.null}")
     private String tipo;
     @NotNull(message = "{telefono.numero.null}")
 	@NotEmpty(message = "{telefono.numero.empty}")
