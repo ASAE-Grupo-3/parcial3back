@@ -23,8 +23,8 @@ public class CursoDTO {
 	@NotEmpty(message = "{curso.nombre.empty}")
     @Size(min=5, max = 25, message = "{curso.nombre.size}")
     private String nombre;
-	@Min(1)
-	@Max(2)
+	@Min(value =1,message = "{curso.periodo.min}")
+	@Max(value=2,message= "{curso.periodo.max}")
 	private Integer periodo;
     @JsonIgnoreProperties(value="cursos")
     public AsignaturaDTO objAsignatura;

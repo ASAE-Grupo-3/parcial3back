@@ -2,6 +2,7 @@ package co.edu.unicauca.asae.core.proyecto.services.DTO;
 
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -24,8 +25,10 @@ public class AsignaturaDTO {
     @Size(min=5, max = 25, message = "{asignatura.nombre.size}")
     private String nombre;
 	
+	@Valid
 	@JsonIgnoreProperties(value="asignaturas")
     private List<DocenteDTO> docentes;
+	@Valid
 	@JsonIgnoreProperties(value="objAsignatura")
     private List<CursoDTO> cursos;
 }

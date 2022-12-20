@@ -2,6 +2,7 @@ package co.edu.unicauca.asae.core.proyecto.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class AsignaturaRestController {
 	}
 
 	@PostMapping("/asignaturas")
-	public AsignaturaDTO create(@RequestBody AsignaturaDTO asignaturaDTO) {
+	public AsignaturaDTO create(@Valid @RequestBody AsignaturaDTO asignaturaDTO) {
 		AsignaturaDTO objAsignaturaDTO = null;
 		objAsignaturaDTO = asignaturaService.save(asignaturaDTO);
 		return objAsignaturaDTO;

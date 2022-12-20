@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.core.proyecto.services.services.clienteServices;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,10 +60,11 @@ public class AsignaturaServiceImpl implements IAsignaturaService {
 //        	
 //        	asignaturaDTO.setIdAsignatura(asignaturaSave.getIdAsignatura());
 			AsignaturaEntity asignaturaEntity = this.modelMapper.map(asignaturaDTO, AsignaturaEntity.class);
-//			asignaturaEntity.getDocentes().forEach(objDocente -> objDocente.addAsignatura(asignaturaEntity));
-//			asignaturaEntity.getDocentes().forEach(objDocente -> objDocente.getAsignaturas().add(asignaturaEntity));
 			asignaturaEntity.getCursos().forEach(objCurso -> objCurso.setObjAsignatura(asignaturaEntity));
-
+			
+//			asignaturaEntity.getDocentes().forEach(objDocente -> objDocente.getAsignaturas().add(asignaturaEntity));
+//			asignaturaEntity.getDocentes().forEach(objDocente -> objDocente.addAsignatura(asignaturaEntity));
+			
 			AsignaturaEntity objAsignaturaEntity = servicioAccesoBaseDatos.save(asignaturaEntity);
 			objasignaturaDTO = this.modelMapper.map(objAsignaturaEntity, AsignaturaDTO.class);
 		}

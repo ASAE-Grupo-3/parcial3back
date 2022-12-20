@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.core.proyecto.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Docente")
-public class DocenteEntity extends PersonaEntity{
+public class DocenteEntity extends PersonaEntity implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4033743796760865730L;
 
 	@Column(name="universidad", nullable = false, length = 150)
     private String universidad;
@@ -35,7 +41,7 @@ public class DocenteEntity extends PersonaEntity{
     @Column(name="salario", nullable = false, length = 150)
     private Float salario;
 
-    @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.MERGE},fetch = FetchType.EAGER)
 	@JoinTable(name="Docente_Asignatura", joinColumns = @JoinColumn(name="idPersona"), inverseJoinColumns = @JoinColumn(name="idAsignatura"),
 	uniqueConstraints = {@UniqueConstraint(columnNames = { "idPersona", "idAsignatura" })})
 	private List<AsignaturaEntity> asignaturas = new ArrayList<>();

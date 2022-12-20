@@ -6,11 +6,11 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
+
+import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -23,8 +23,9 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Validated
 public class EstudianteDTO extends PersonaDTO {
-	@PastOrPresent(message = "{estudiante.fechaIngreso.fechaFuturo}")
+	@PastOrPresent(message = "{estudiante.fechaIngreso.past}")
 	@NotNull(message = "{estudiante.fechaIngreso.null}")
     private Date fechaIngreso;
     
@@ -33,11 +34,13 @@ public class EstudianteDTO extends PersonaDTO {
 	@Email(message = "{estudiante.correo.mask}")
 	private String correo;
 	
-	@Valid
+	
     @JsonIgnoreProperties(value="objEstudiante")
+    @Valid
 	private DireccionDTO objDireccion;
     
-    @Valid
+    
     @JsonIgnoreProperties(value="objEstudiante")
-	private List<TelefonoDTO> telefonos = new ArrayList<>();
+    @Valid
+    private List<TelefonoDTO> telefonos = new ArrayList<>();
 }
