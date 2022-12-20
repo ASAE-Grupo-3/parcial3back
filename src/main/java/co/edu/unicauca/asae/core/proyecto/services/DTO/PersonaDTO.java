@@ -19,19 +19,19 @@ import lombok.Setter;
 public class PersonaDTO {
 
 	private Integer idPersona;
-	@NotNull(message = "{estudiante.identificacion.null}")
-	@NotEmpty(message = "{estudiante.identificacion.empty}")
+	@NotNull(message = "{persona.identificacion.null}")
+	@NotEmpty(message = "{persona.identificacion.empty}")
 	private String noIdentificacion;
-	@NotNull(message = "{estudiante.tipoIdentificacion.null}")
-	@NotEmpty(message = "{estudiante.tipoIdentificacion.empty}")
+	@NotNull(message = "{persona.tipoIdentificacion.null}")
+	@NotEmpty(message = "{persona.tipoIdentificacion.empty}")
 	private String tipoIdentificacion;
-	@NotNull(message = "{estudiante.nombres.null}")
-	@NotEmpty(message = "{estudiante.nombres.empty}")
-	@Size(min=3, max = 50, message = "{estudiante.nombres.size}")
+	@NotNull(message = "{persona.nombres.null}")
+	@NotEmpty(message = "{persona.nombres.empty}")
+	@Size(min=3, max = 50, message = "{persona.nombres.size}")
 	private String nombres;
-	@NotNull(message = "{estudiante.apellidos.null}")
-	@NotEmpty(message = "{estudiante.apellidos.empty}")
-	@Size(min=3, max = 50, message = "{estudiante.apellidos.size}")
+	@NotNull(message = "{persona.apellidos.null}")
+	@NotEmpty(message = "{persona.apellidos.empty}")
+	@Size(min=3, max = 50, message = "{persona.apellidos.size}")
 	private String apellidos;
 	
 }

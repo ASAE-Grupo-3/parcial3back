@@ -19,8 +19,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DocenteDTO extends PersonaDTO {
-    
+	@NotNull(message = "{docente.universidad.null}")
+	@NotEmpty(message = "{docente.universidad.empty}")
 	private String universidad;
+	@NotNull(message = "{docente.tipoDocente.null}")
+	@NotEmpty(message = "{docente.tipoDocente.empty}")
     private String tipoDocente;
     @NotNull(message = "{docente.salario.null}")
     @PositiveOrZero(message = "{docente.salario.positivo}")
