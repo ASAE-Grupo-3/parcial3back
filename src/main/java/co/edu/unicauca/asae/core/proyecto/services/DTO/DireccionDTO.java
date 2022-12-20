@@ -24,19 +24,11 @@ public class DireccionDTO {
 	@NotEmpty(message = "{direccion.calle.empty}")
     @Size(min=5, max = 25, message = "{direccion.calle.size}")
 	private String calle;
-<<<<<<< Updated upstream
-
-	@NotNull(message = "{direccion.localidad.null}")
-	@NotEmpty(message = "{direccion.localidad.empty}")
-	private String localidad;
-
-=======
 	
 	@NotNull(message = "{direccion.localidad.null}")
 	@NotEmpty(message = "{direccion.localidad.empty}")
 	private String localidad;
 	@Valid
->>>>>>> Stashed changes
 	@JsonIgnoreProperties(value="objDireccion")
 	private EstudianteDTO objEstudiante;
 
