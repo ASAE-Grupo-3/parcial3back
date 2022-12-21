@@ -50,6 +50,10 @@ public class CursoServiceImpl implements ICursoService {
 			CursoEntity curso = optional.get();
 			
 			cursoDTO = this.modelMapper.map(curso, CursoDTO.class);
+		}else {
+			EntidadNoExisteException objException = new EntidadNoExisteException("Curso con idCurso: "
+					+ id+" no existe en la Base De Datos.");
+			throw objException;
 		}
 		
 		return cursoDTO;

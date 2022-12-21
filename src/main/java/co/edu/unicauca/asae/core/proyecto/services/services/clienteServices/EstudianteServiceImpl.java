@@ -56,6 +56,10 @@ public class EstudianteServiceImpl implements IEstudianteService {
 			EstudianteEntity user = optional.get();
 			
 			estudianteDTO = this.modelMapper.map(user, EstudianteDTO.class);
+		}else {
+			EntidadNoExisteException objException = new EntidadNoExisteException("Estudiante con idPersona: "
+					+ id+" no existe en la Base De Datos.");
+			throw objException;
 		}
 		
 		return estudianteDTO;
