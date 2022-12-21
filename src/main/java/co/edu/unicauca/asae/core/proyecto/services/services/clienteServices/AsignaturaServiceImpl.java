@@ -137,4 +137,10 @@ public class AsignaturaServiceImpl implements IAsignaturaService {
 		return estado;
 	}
 
+	@Override
+	public List<AsignaturaDTO> consulta3(String nombre) {
+		Iterable<AsignaturaEntity> asignaturasEntity = this.servicioAccesoBaseDatos.findByNombreIgnoreCaseContainingOrderByNombreAsc(nombre);
+		List<AsignaturaDTO> asignaturaDTO = this.modelMapper.map(asignaturasEntity, new TypeToken<List<AsignaturaDTO>>() {}.getType());
+		return asignaturaDTO;
+	}
 }

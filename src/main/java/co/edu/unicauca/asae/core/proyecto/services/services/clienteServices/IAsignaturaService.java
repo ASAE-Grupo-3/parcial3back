@@ -18,4 +18,6 @@ public interface IAsignaturaService {
 	public AsignaturaDTO update(Integer id, AsignaturaDTO asignaturaDTO);
 
 	public boolean delete(Integer id);
+
+	public List<AsignaturaDTO> consulta3(String nombre);
 }

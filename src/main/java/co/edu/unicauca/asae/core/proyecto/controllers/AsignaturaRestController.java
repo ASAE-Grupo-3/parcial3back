@@ -53,5 +53,9 @@ public class AsignaturaRestController {
 	public Boolean delete(@PathVariable Integer id) {
 		return this.asignaturaService.delete(id);
 	}
-    
+
+	@GetMapping("/asignaturas/consulta3/{nombre}")
+	public List<AsignaturaDTO> consulta3(@PathVariable String nombre) {
+		return asignaturaService.consulta3(nombre);
+	}
 }

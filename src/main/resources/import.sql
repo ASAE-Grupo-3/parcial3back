@@ -29,9 +29,12 @@ INSERT INTO `docente` (`idPersona`, `apellidos`, `noIdentificacion`, `nombres`, 
 
 
 INSERT INTO `asignatura`(`idAsignatura`, `nombre`) VALUES(null, 'Calculo III');
+INSERT INTO `asignatura`(`idAsignatura`, `nombre`) VALUES(null, 'Calculo II');
+INSERT INTO `asignatura`(`idAsignatura`, `nombre`) VALUES(null, 'Calculo I');
 INSERT INTO `asignatura` (`idAsignatura`, `nombre`) VALUES (null, 'Ingeniería de Requisitos'); 
 INSERT INTO `docente_asignatura`(`idPersona`, `idAsignatura`) VALUES(1, 1);
 INSERT INTO `docente_asignatura` (`idPersona`, `idAsignatura`) VALUES (2, 2); 
+INSERT INTO `docente_asignatura` (`idPersona`, `idAsignatura`) VALUES (2, 3); 
 
 INSERT INTO `curso` (`idCurso`, `nombre`, `periodo`, `idAsignatura`) VALUES (null, 'CURSO B', 1,1); 
 INSERT INTO `curso` (`idCurso`, `nombre`, `periodo`, `idAsignatura`) VALUES (null, 'A', 2,2); 
