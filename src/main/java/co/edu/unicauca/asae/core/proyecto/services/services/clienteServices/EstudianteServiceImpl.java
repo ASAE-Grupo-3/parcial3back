@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadNoExisteException;
 import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadYaExisteException;
+import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.ErrorAlmacenamientoBDException;
 import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.ReglaNegocioExcepcion;
 import co.edu.unicauca.asae.core.proyecto.models.EstudianteEntity;
 import co.edu.unicauca.asae.core.proyecto.repositories.EstudianteRepository;
@@ -66,6 +67,12 @@ public class EstudianteServiceImpl implements IEstudianteService {
 	public EstudianteDTO save(EstudianteDTO estudiante) {
 		this.validarIdPersona(estudiante);
 		validarTipoIdandNoId(estudiante);
+
+		if (!this.servicioAccesoBaseDatos.findByCorreo(estudiante.getCorreo()).isEmpty()) {
+			ErrorAlmacenamientoBDException objExcepcion = new ErrorAlmacenamientoBDException("ESTUDIANTE con Correo: "
+				+estudiante.getCorreo() +" existe en la Base De Datos.");
+			throw objExcepcion;
+		}
 		
 		EstudianteDTO estudianteDTO = null;
 		EstudianteEntity EstudianteEntity = this.modelMapper.map(estudiante, EstudianteEntity.class);

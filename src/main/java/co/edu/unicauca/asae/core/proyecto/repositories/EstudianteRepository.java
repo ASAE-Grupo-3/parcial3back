@@ -9,4 +9,5 @@ import co.edu.unicauca.asae.core.proyecto.models.EstudianteEntity;
 public interface EstudianteRepository extends CrudRepository<EstudianteEntity, Integer> {
 
 	public List<EstudianteEntity> findBynoIdentificacion(String noIdentificacion);
+	public List<EstudianteEntity> findByCorreo(String correo);
 }
