@@ -56,30 +56,42 @@ public class DocenteServiceImpl implements IDocenteService {
 	@Transactional()
 	public DocenteDTO save(DocenteDTO docente) {
 		
+		this.validarIdPersona(docente);
 		this.validarTipoIdandNoId(docente);
 		
 		DocenteEntity docenteEntity = this.modelMapper.map(docente, DocenteEntity.class);
-
+		docenteEntity.setIdPersona(null);
 		DocenteEntity objDocenteEntity = this.servicioAccesoBaseDatos.save(docenteEntity);
 		DocenteDTO DocenteDTO = this.modelMapper.map(objDocenteEntity, DocenteDTO.class);
 		return DocenteDTO;
 	}
+	
+	private void validarIdPersona(DocenteDTO docente) {
+		if (docente.getIdPersona()!=null) {
+			if (this.servicioAccesoBaseDatos.existsById(docente.getIdPersona())) {
+				EntidadYaExisteException objExcepcion = new EntidadYaExisteException("DOCENTE con IdPersona: "
+			+docente.getIdPersona()+" existe en la Base De Datos.");
+				throw objExcepcion;
+			}
+		}
+		
+	}
 
-	private void validarTipoIdandNoId(DocenteDTO estudiante) {
-		List<DocenteEntity> docentesEntityRequest = this.servicioAccesoBaseDatos.findBynoIdentificacion(estudiante.getNoIdentificacion());
+	private void validarTipoIdandNoId(DocenteDTO docente) {
+		List<DocenteEntity> docentesEntityRequest = this.servicioAccesoBaseDatos.findBynoIdentificacion(docente.getNoIdentificacion());
 		
 		if (!docentesEntityRequest.isEmpty()) {
 			boolean isDocente = false;
 			for (DocenteEntity objDocente : docentesEntityRequest) {
-				if (objDocente.getNoIdentificacion().equals(estudiante.getNoIdentificacion())
-						&& objDocente.getTipoIdentificacion().equals(estudiante.getTipoIdentificacion())) {
+				if (objDocente.getNoIdentificacion().equals(docente.getNoIdentificacion())
+						&& objDocente.getTipoIdentificacion().equals(docente.getTipoIdentificacion())) {
 					isDocente = true;
 					break;
 				}
 			}
 			if (isDocente) {
-				EntidadYaExisteException objExcepcion = new EntidadYaExisteException("DOCENTE con tipoId: "+estudiante.getTipoIdentificacion()+
-						" y número Id: "+ estudiante.getNoIdentificacion()+" existe en la Base De Datos.");
+				EntidadYaExisteException objExcepcion = new EntidadYaExisteException("DOCENTE con tipoId: "+docente.getTipoIdentificacion()+
+						" y número Id: "+ docente.getNoIdentificacion()+" existe en la Base De Datos.");
 				throw objExcepcion;
 			}
 		}

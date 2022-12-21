@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadYaExisteException;
 import co.edu.unicauca.asae.core.proyecto.models.EstudianteEntity;
 import co.edu.unicauca.asae.core.proyecto.repositories.EstudianteRepository;
+import co.edu.unicauca.asae.core.proyecto.services.DTO.DocenteDTO;
 import co.edu.unicauca.asae.core.proyecto.services.DTO.EstudianteDTO;
 
 import org.modelmapper.ModelMapper;
@@ -62,7 +63,7 @@ public class EstudianteServiceImpl implements IEstudianteService {
 	@Override
 	@Transactional()
 	public EstudianteDTO save(EstudianteDTO estudiante) {
-		
+		this.validarIdPersona(estudiante);
 		validarTipoIdandNoId(estudiante);
 		
 		EstudianteDTO estudianteDTO = null;
@@ -75,6 +76,17 @@ public class EstudianteServiceImpl implements IEstudianteService {
 		estudianteDTO = this.modelMapper.map(objEstudianteEntity, EstudianteDTO.class);
 		
 		return estudianteDTO;
+	}
+	
+	private void validarIdPersona(EstudianteDTO estudiante) {
+		if (estudiante.getIdPersona()!=null) {
+			if (this.servicioAccesoBaseDatos.existsById(estudiante.getIdPersona())) {
+				EntidadYaExisteException objExcepcion = new EntidadYaExisteException("ESTUDIANTE con IdPersona: "
+			+estudiante.getIdPersona()+" existe en la Base De Datos.");
+				throw objExcepcion;
+			}
+		}
+		
 	}
 	
 	private void validarTipoIdandNoId(EstudianteDTO estudiante) {
