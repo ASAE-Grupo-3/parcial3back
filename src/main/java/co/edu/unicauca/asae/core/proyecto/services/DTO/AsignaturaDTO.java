@@ -22,7 +22,7 @@ public class AsignaturaDTO {
     private Integer idAsignatura;
 	@NotNull(message = "{asignatura.nombre.null}")
 	@NotEmpty(message = "{asignatura.nombre.empty}")
-    @Size(min=5, max = 25, message = "{asignatura.nombre.size}")
+    @Size(min=6, max = 24, message = "{asignatura.nombre.size}")
     private String nombre;
 	
 	@Valid

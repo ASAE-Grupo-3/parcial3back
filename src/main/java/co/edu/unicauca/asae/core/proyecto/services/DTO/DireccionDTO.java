@@ -22,7 +22,7 @@ public class DireccionDTO {
 	private Integer idEstudiante;
 	@NotNull(message = "{direccion.calle.null}")
 	@NotEmpty(message = "{direccion.calle.empty}")
-    @Size(min=5, max = 25, message = "{direccion.calle.size}")
+    @Size(min=6, max = 24, message = "{direccion.calle.size}")
 	private String calle;
 	
 	@NotNull(message = "{direccion.localidad.null}")

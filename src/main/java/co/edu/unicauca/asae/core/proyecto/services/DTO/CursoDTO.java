@@ -21,7 +21,7 @@ public class CursoDTO {
 	private Integer idCurso;
 	@NotNull(message = "{curso.nombre.null}")
 	@NotEmpty(message = "{curso.nombre.empty}")
-    @Size(min=5, max = 25, message = "{curso.nombre.size}")
+    @Size(min=6, max = 24, message = "{curso.nombre.size}")
     private String nombre;
 	@Min(value =1,message = "{curso.periodo.min}")
 	@Max(value=2,message= "{curso.periodo.max}")
