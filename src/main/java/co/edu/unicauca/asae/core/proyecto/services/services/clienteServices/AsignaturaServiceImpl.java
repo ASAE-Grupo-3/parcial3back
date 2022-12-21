@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadNoExisteException;
 import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadYaExisteException;
 import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.ReglaNegocioExcepcion;
 import co.edu.unicauca.asae.core.proyecto.models.AsignaturaEntity;
@@ -114,8 +115,17 @@ public class AsignaturaServiceImpl implements IAsignaturaService {
 
 	@Override
 	public boolean delete(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean estado = false;
+		if(this.servicioAccesoBaseDatos.existsById(id)) {
+			this.servicioAccesoBaseDatos.deleteById(id);
+			estado = !this.servicioAccesoBaseDatos.existsById(id);
+		}
+		else {
+			EntidadNoExisteException objException = new EntidadNoExisteException("Asignatura con idAsignatura: "
+					+ id+" no existe en la Base De Datos.");
+			throw objException;
+		}
+		return estado;
 	}
 
 }
