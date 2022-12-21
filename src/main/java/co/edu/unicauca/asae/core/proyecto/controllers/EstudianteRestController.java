@@ -1,6 +1,7 @@
 
 package co.edu.unicauca.asae.core.proyecto.controllers;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.unicauca.asae.core.proyecto.services.DTO.EstudianteDTO;
@@ -32,6 +34,21 @@ public class EstudianteRestController {
 	@GetMapping("/estudiantes")
 	public List<EstudianteDTO> index() {
 		return estudianteService.findAll();
+	}
+
+	
+	@GetMapping("/estudiantes/consulta1/{opcion}")
+	public List<EstudianteDTO> consulta1(@PathVariable Integer opcion, @RequestParam String palabra) {
+	List<EstudianteDTO> lista = new LinkedList<>();
+	System.out.println("variable=" + opcion + " palabra buscada: "+  palabra);
+	if (opcion == 1) {
+		lista = estudianteService.BuscarPorNombre(palabra);
+	} else if (opcion == 2) {
+		lista = estudianteService.BuscarPorApellido(palabra);
+	} else if (opcion == 3) {
+		lista = estudianteService.BuscarPorCorreo(palabra);
+	}
+		return lista;
 	}
 
 	@GetMapping("/estudiantes/consulta2/{id}")

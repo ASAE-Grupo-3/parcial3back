@@ -12,6 +12,12 @@ public interface IEstudianteService {
 
 	public List<EstudianteDTO> findByNoIdentificacionContaining(Integer id);
 
+	public List<EstudianteDTO> BuscarPorApellido(String apellido);
+
+	public List<EstudianteDTO> BuscarPorNombre(String nombre);
+
+	public List<EstudianteDTO> BuscarPorCorreo(String correo);
+
 	public EstudianteDTO save(EstudianteDTO cliente);
 
 	public EstudianteDTO update(Integer id, EstudianteDTO cliente);

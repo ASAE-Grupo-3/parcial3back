@@ -8,4 +8,5 @@ import co.edu.unicauca.asae.core.proyecto.models.DocenteEntity;
 
 public interface DocenteRepository extends CrudRepository<DocenteEntity,Integer>{
 	public List<DocenteEntity> findBynoIdentificacion(String noIdentificacion);
+
 }
