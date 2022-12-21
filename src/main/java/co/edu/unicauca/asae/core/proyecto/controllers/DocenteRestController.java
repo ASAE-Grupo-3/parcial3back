@@ -82,27 +82,8 @@ public class DocenteRestController {
 	}
 
 	@DeleteMapping("/docentes/{id}")
-	public ResponseEntity<?> delete(@PathVariable Integer id) {
-		DocenteDTO objDocente = null;
-		HashMap<String, Object> respuestas = new HashMap<>();
-		ResponseEntity objRespuesta;
-
-		try{
-			objDocente = docenteService.findById(id);
-			
-			if(objDocente == null){
-				respuestas.put("mensaje", "El doncente con id "+id+" que desea eliminar no esta registrado");
-				objRespuesta = new ResponseEntity<>(respuestas, HttpStatus.NOT_FOUND);
-			}else{
-				docenteService.delete(id);
-				objRespuesta = new ResponseEntity<>(true, HttpStatus.OK);
-			}
-		}catch(DataAccessException e){
-			respuestas.put("mensaje", "Error al realizar la eliminacion del recurso");
-			respuestas.put("Descripcion del error", e.getMessage());
-			objRespuesta = new ResponseEntity<>(respuestas, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return objRespuesta;
+	public Boolean delete(@PathVariable Integer id) {
+		return this.docenteService.delete(id);
 	}
 
 }

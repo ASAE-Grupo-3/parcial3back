@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadNoExisteException;
 import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadYaExisteException;
 import co.edu.unicauca.asae.core.proyecto.models.DocenteEntity;
 import co.edu.unicauca.asae.core.proyecto.repositories.DocenteRepository;
@@ -128,14 +129,17 @@ public class DocenteServiceImpl implements IDocenteService {
 	@Override
 	@Transactional()
 	public boolean delete(Integer id) {
-		boolean bandera = false;
-		//DocenteEntity optional = this.servicioAccesoBaseDatos.findById(id).orElse(null);
-		if (this.servicioAccesoBaseDatos.existsById(id)) {
+		boolean estado = false;
+		if(this.servicioAccesoBaseDatos.existsById(id)) {
 			this.servicioAccesoBaseDatos.deleteById(id);
-			
-			bandera = true;
+			estado = !this.servicioAccesoBaseDatos.existsById(id);
 		}
-		return bandera;
+		else {
+			EntidadNoExisteException objException = new EntidadNoExisteException("DOCENTE con idPersona: "
+					+ id+" no existe en la Base De Datos.");
+			throw objException;
+		}
+		return estado;
 	}
 
 }
