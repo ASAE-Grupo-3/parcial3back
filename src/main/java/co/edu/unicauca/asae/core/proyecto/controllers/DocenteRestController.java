@@ -35,7 +35,7 @@ public class DocenteRestController {
 
 	@GetMapping("/docentes")
 	public ResponseEntity<List<DocenteDTO>> index() {
-		return new ResponseEntity<>(docenteService.findAll(), HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(docenteService.findAll(), HttpStatus.OK);
 	}
 
 	@GetMapping("/docentes/{id}")
