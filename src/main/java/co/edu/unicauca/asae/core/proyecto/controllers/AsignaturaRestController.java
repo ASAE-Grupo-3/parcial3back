@@ -58,20 +58,10 @@ public class AsignaturaRestController {
 	}
 
 	@PostMapping("/asignaturas")
-	public ResponseEntity<?> create(@Valid @RequestBody AsignaturaDTO asignaturaDTO) {
-		AsignaturaDTO objAsignatura = null;
-		HashMap<String, Object> respuestas = new HashMap<>();
-		ResponseEntity objRespuesta;
-		try{
-			objAsignatura = asignaturaService.save(asignaturaDTO);
-			objRespuesta = new ResponseEntity<AsignaturaDTO>(objAsignatura, HttpStatus.CREATED);
-		}catch(DataAccessException e){
-			respuestas.put("mensaje", "Error al realizar la insercion del recurso");
-			respuestas.put("Descripcion del error", e.getMessage());
-			objRespuesta = new ResponseEntity<>(respuestas, HttpStatus.BAD_REQUEST);
-		}
-		
-		return objRespuesta;
+	public AsignaturaDTO create(@Valid @RequestBody AsignaturaDTO asignaturaDTO) {
+		AsignaturaDTO objAsignaturaDTO = null;
+		objAsignaturaDTO = asignaturaService.save(asignaturaDTO);
+		return objAsignaturaDTO;
 	}
     
 }

@@ -11,11 +11,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadYaExisteException;
+import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.ReglaNegocioExcepcion;
 import co.edu.unicauca.asae.core.proyecto.models.AsignaturaEntity;
 import co.edu.unicauca.asae.core.proyecto.models.CursoEntity;
 import co.edu.unicauca.asae.core.proyecto.repositories.AsignaturaRepository;
 import co.edu.unicauca.asae.core.proyecto.services.DTO.AsignaturaDTO;
 import co.edu.unicauca.asae.core.proyecto.services.DTO.CursoDTO;
+import co.edu.unicauca.asae.core.proyecto.services.DTO.DocenteDTO;
 
 @Service
 public class AsignaturaServiceImpl implements IAsignaturaService {
@@ -52,7 +55,8 @@ public class AsignaturaServiceImpl implements IAsignaturaService {
 	@Transactional
 	public AsignaturaDTO save(AsignaturaDTO asignaturaDTO) {
 		AsignaturaDTO objasignaturaDTO = null;
-		if (asignaturaDTO.getCursos().size() > 0 && asignaturaDTO.getDocentes().size() >= 2) {
+		this.validarIdAsignatura(asignaturaDTO);
+		if (asignaturaDTO.getCursos().size() > 0 && asignaturaDTO.getDocentes().size() >= 1) {
 
 //        	AsignaturaEntity asignaturaAux = new AsignaturaEntity();
 //        	asignaturaAux.setNombre(asignaturaDTO.getNombre());
@@ -67,8 +71,23 @@ public class AsignaturaServiceImpl implements IAsignaturaService {
 			
 			AsignaturaEntity objAsignaturaEntity = servicioAccesoBaseDatos.save(asignaturaEntity);
 			objasignaturaDTO = this.modelMapper.map(objAsignaturaEntity, AsignaturaDTO.class);
+		}else {
+			ReglaNegocioExcepcion objExcepcion = new ReglaNegocioExcepcion("La asignatura con Nombre: '"+
+					asignaturaDTO.getNombre()+"' debe asociar a un curso y minimo a un docente");
+			throw objExcepcion;
 		}
 		return objasignaturaDTO;
+	}
+	
+	private void validarIdAsignatura(AsignaturaDTO asignatura) {
+		if (asignatura.getIdAsignatura() != null) {
+			if (this.servicioAccesoBaseDatos.existsById(asignatura.getIdAsignatura())) {
+				EntidadYaExisteException objExcepcion = new EntidadYaExisteException("ASIGNATURA con IdAsignatura: "
+			+asignatura.getIdAsignatura()+" existe en la Base De Datos.");
+				throw objExcepcion;
+			}
+		}
+		
 	}
 
 	@Override

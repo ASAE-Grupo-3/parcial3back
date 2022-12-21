@@ -60,6 +60,5 @@ public class CursoRestController {
 	@DeleteMapping("/cursos/{id}")
 	public Boolean delete(@PathVariable Integer id) {
 		return this.CursoService.delete(id);
-
 	}
 }

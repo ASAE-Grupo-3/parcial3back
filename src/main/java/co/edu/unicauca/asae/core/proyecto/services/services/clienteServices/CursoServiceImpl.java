@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadNoExisteException;
+import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadYaExisteException;
 import co.edu.unicauca.asae.core.proyecto.models.AsignaturaEntity;
 import co.edu.unicauca.asae.core.proyecto.models.CursoEntity;
 import co.edu.unicauca.asae.core.proyecto.repositories.AsignaturaRepository;
@@ -91,6 +93,11 @@ public class CursoServiceImpl implements ICursoService {
 			this.servicioAccesoBaseDatos.deleteById(id);
 			estado = !this.servicioAccesoBaseDatos.existsById(id);
 		}
+//		else {
+//			EntidadNoExisteException objException = new EntidadNoExisteException("Curso con idCurso: "
+//					+ id+" no existe en la Base De Datos.");
+//			throw objException;
+//		}
 		return estado;
 	}
 }
