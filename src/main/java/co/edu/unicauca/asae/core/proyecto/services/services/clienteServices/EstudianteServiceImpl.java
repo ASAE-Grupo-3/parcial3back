@@ -119,13 +119,15 @@ public class EstudianteServiceImpl implements IEstudianteService {
 	}
 	
 	private void validarTipoIdandNoId(EstudianteDTO estudiante) {
-		List<EstudianteEntity> docentesEntityRequest = this.servicioAccesoBaseDatos.findBynoIdentificacion(estudiante.getNoIdentificacion());
+		
 		
 		if(this.servicioAccesoBaseDatos.existeNoIdandTipoId(estudiante.getTipoIdentificacion(), estudiante.getNoIdentificacion())>=1) {
 			EntidadYaExisteException objExcepcion = new EntidadYaExisteException("ESTUDIANTE con tipoId: "+estudiante.getTipoIdentificacion()+
 					" y número Id: "+ estudiante.getNoIdentificacion()+" existe en la Base De Datos.");
 			throw objExcepcion;
 		}
+		
+//		List<EstudianteEntity> docentesEntityRequest = this.servicioAccesoBaseDatos.findBynoIdentificacion(estudiante.getNoIdentificacion());
 		
 //		if (!docentesEntityRequest.isEmpty()) {
 //			boolean isEstudiante = false;

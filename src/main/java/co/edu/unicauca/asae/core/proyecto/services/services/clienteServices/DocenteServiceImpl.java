@@ -86,23 +86,29 @@ public class DocenteServiceImpl implements IDocenteService {
 	}
 
 	private void validarTipoIdandNoId(DocenteDTO docente) {
-		List<DocenteEntity> docentesEntityRequest = this.servicioAccesoBaseDatos.findBynoIdentificacion(docente.getNoIdentificacion());
 		
-		if (!docentesEntityRequest.isEmpty()) {
-			boolean isDocente = false;
-			for (DocenteEntity objDocente : docentesEntityRequest) {
-				if (objDocente.getNoIdentificacion().equals(docente.getNoIdentificacion())
-						&& objDocente.getTipoIdentificacion().equals(docente.getTipoIdentificacion())) {
-					isDocente = true;
-					break;
-				}
-			}
-			if (isDocente) {
-				EntidadYaExisteException objExcepcion = new EntidadYaExisteException("DOCENTE con tipoId: "+docente.getTipoIdentificacion()+
-						" y número Id: "+ docente.getNoIdentificacion()+" existe en la Base De Datos.");
-				throw objExcepcion;
-			}
+		if(this.servicioAccesoBaseDatos.existeNoIdandTipoId(docente.getTipoIdentificacion(), docente.getNoIdentificacion())>=1) {
+			EntidadYaExisteException objExcepcion = new EntidadYaExisteException("ESTUDIANTE con tipoId: "+docente.getTipoIdentificacion()+
+					" y número Id: "+ docente.getNoIdentificacion()+" existe en la Base De Datos.");
+			throw objExcepcion;
 		}
+//		List<DocenteEntity> docentesEntityRequest = this.servicioAccesoBaseDatos.findBynoIdentificacion(docente.getNoIdentificacion());
+//		
+//		if (!docentesEntityRequest.isEmpty()) {
+//			boolean isDocente = false;
+//			for (DocenteEntity objDocente : docentesEntityRequest) {
+//				if (objDocente.getNoIdentificacion().equals(docente.getNoIdentificacion())
+//						&& objDocente.getTipoIdentificacion().equals(docente.getTipoIdentificacion())) {
+//					isDocente = true;
+//					break;
+//				}
+//			}
+//			if (isDocente) {
+//				EntidadYaExisteException objExcepcion = new EntidadYaExisteException("DOCENTE con tipoId: "+docente.getTipoIdentificacion()+
+//						" y número Id: "+ docente.getNoIdentificacion()+" existe en la Base De Datos.");
+//				throw objExcepcion;
+//			}
+//		}
 	}
 	
 	@Override
