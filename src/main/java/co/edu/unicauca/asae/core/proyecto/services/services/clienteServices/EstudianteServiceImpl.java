@@ -79,7 +79,7 @@ public class EstudianteServiceImpl implements IEstudianteService {
 		this.validarIdPersona(estudiante);
 		validarTipoIdandNoId(estudiante);
 
-		if (!this.servicioAccesoBaseDatos.findByCorreo(estudiante.getCorreo()).isEmpty()) {
+		if (this.servicioAccesoBaseDatos.findByCorreo(estudiante.getCorreo())>=1) {
 			ErrorAlmacenamientoBDException objExcepcion = new ErrorAlmacenamientoBDException("ESTUDIANTE con Correo: "
 				+estudiante.getCorreo() +" existe en la Base De Datos.");
 			throw objExcepcion;
