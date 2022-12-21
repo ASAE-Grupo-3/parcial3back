@@ -41,7 +41,7 @@ public class CursoEntity implements Serializable{
     @Column(name="periodo", nullable = false, length = 150)
     private Integer periodo;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     @JoinColumn(name="idAsignatura", nullable=false)
     private AsignaturaEntity objAsignatura;
 
