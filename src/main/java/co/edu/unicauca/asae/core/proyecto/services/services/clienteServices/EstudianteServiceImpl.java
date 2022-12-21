@@ -64,9 +64,12 @@ public class EstudianteServiceImpl implements IEstudianteService {
 	public EstudianteDTO save(EstudianteDTO estudiante) {
 
 		EstudianteDTO estudianteDTO = null;
-		if (this.servicioAccesoBaseDatos.findBynoIdentificacion(estudiante.getNoIdentificacion()).isPresent()) {
-			EntidadYaExisteException objExcepcion = new EntidadYaExisteException("Estudiante con número Id: "
-					+ estudiante.getNoIdentificacion()+" existe en la Base De Datos.");
+		EstudianteEntity estudianteEntityRequest = this.servicioAccesoBaseDatos.findBynoIdentificacion(estudiante.getNoIdentificacion()).orElse(null);
+		
+		if (estudianteEntityRequest!=null && estudianteEntityRequest.getNoIdentificacion().equals(estudiante.getNoIdentificacion())
+				&& estudianteEntityRequest.getTipoIdentificacion().equals(estudiante.getTipoIdentificacion())) {
+			EntidadYaExisteException objExcepcion = new EntidadYaExisteException("Estudiante con tipoId: "+estudiante.getTipoIdentificacion()+
+					" y número Id: "+ estudiante.getNoIdentificacion()+" existe en la Base De Datos.");
 			throw objExcepcion;
 		}
 		

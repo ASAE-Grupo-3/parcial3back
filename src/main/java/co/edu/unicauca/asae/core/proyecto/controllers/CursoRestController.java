@@ -2,6 +2,7 @@ package co.edu.unicauca.asae.core.proyecto.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class CursoRestController {
 	}
 
 	@PostMapping("/cursos")
-	public CursoDTO create(@RequestBody CursoDTO curso) {
+	public CursoDTO create(@Valid @RequestBody CursoDTO curso) {
 		CursoDTO objCurso = null;
 		objCurso = CursoService.save(curso);
 		return objCurso;
