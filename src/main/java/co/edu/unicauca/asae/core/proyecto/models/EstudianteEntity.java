@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,7 +20,7 @@ import lombok.Setter;
 @Setter @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Estudiante")
+@Table(name = "Estudiante",uniqueConstraints = { @UniqueConstraint(columnNames = { "noIdentificacion", "tipoIdentificacion" }) })
 public class EstudianteEntity extends PersonaEntity{
     @Column(name="fechaIngreso", nullable = false)
     private Date fechaIngreso;

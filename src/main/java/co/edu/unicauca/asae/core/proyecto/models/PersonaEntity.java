@@ -22,7 +22,7 @@ public class PersonaEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idPersona;
 	
-	@Column(name="noIdentificacion", nullable = false, length = 150, unique = true)
+	@Column(name="noIdentificacion", nullable = false, length = 150)
 	private String noIdentificacion;
 	
 	@Column(name="tipoIdentificacion", nullable = false, length = 150)
