@@ -1,6 +1,5 @@
 package co.edu.unicauca.asae.core.proyecto.services.services.clienteServices;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,11 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadYaExisteException;
 import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.ReglaNegocioExcepcion;
 import co.edu.unicauca.asae.core.proyecto.models.AsignaturaEntity;
-import co.edu.unicauca.asae.core.proyecto.models.CursoEntity;
 import co.edu.unicauca.asae.core.proyecto.repositories.AsignaturaRepository;
 import co.edu.unicauca.asae.core.proyecto.services.DTO.AsignaturaDTO;
-import co.edu.unicauca.asae.core.proyecto.services.DTO.CursoDTO;
-import co.edu.unicauca.asae.core.proyecto.services.DTO.DocenteDTO;
 
 @Service
 public class AsignaturaServiceImpl implements IAsignaturaService {
@@ -56,6 +52,7 @@ public class AsignaturaServiceImpl implements IAsignaturaService {
 	public AsignaturaDTO save(AsignaturaDTO asignaturaDTO) {
 		AsignaturaDTO objasignaturaDTO = null;
 		this.validarIdAsignatura(asignaturaDTO);
+		this.validarNombreAsignatura(asignaturaDTO);
 		if (asignaturaDTO.getCursos().size() > 0 && asignaturaDTO.getDocentes().size() >= 1) {
 
 //        	AsignaturaEntity asignaturaAux = new AsignaturaEntity();
@@ -77,6 +74,25 @@ public class AsignaturaServiceImpl implements IAsignaturaService {
 			throw objExcepcion;
 		}
 		return objasignaturaDTO;
+	}
+	
+	private void validarNombreAsignatura(AsignaturaDTO asignatura) {
+		List<AsignaturaEntity> asignaturasEntityRequest = this.servicioAccesoBaseDatos.findByNombre(asignatura.getNombre());
+		
+		if (!asignaturasEntityRequest.isEmpty()) {
+			boolean isAsignatura = false;
+			for (AsignaturaEntity objAsignatura : asignaturasEntityRequest) {
+				if (objAsignatura.getNombre().equals(asignatura.getNombre())) {
+					isAsignatura = true;
+					break;
+				}
+			}
+			if (isAsignatura) {
+				EntidadYaExisteException objExcepcion = new EntidadYaExisteException("ASIGNATURA con nombre: "+asignatura.getNombre()+
+						" existe en la Base De Datos.");
+				throw objExcepcion;
+			}
+		}
 	}
 	
 	private void validarIdAsignatura(AsignaturaDTO asignatura) {
