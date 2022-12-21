@@ -34,6 +34,11 @@ public class EstudianteRestController {
 		return estudianteService.findAll();
 	}
 
+	@GetMapping("/estudiantes/consulta2/{id}")
+	public List<EstudianteDTO> consulta2(@PathVariable Integer id) {
+		return estudianteService.findByNoIdentificacionContaining(id);
+	}
+
 	@GetMapping("/estudiantes/{id}")
 	public EstudianteDTO show(@Positive(message = "{consultar.recurso.identificacion}") @PathVariable Integer id) {
 		EstudianteDTO objEstudiante = null;

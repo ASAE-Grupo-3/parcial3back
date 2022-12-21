@@ -10,6 +10,8 @@ public interface IEstudianteService {
 
 	public EstudianteDTO findById(Integer id);
 
+	public List<EstudianteDTO> findByNoIdentificacionContaining(Integer id);
+
 	public EstudianteDTO save(EstudianteDTO cliente);
 
 	public EstudianteDTO update(Integer id, EstudianteDTO cliente);

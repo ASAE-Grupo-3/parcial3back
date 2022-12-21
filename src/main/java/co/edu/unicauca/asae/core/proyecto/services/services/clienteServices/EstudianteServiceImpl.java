@@ -61,6 +61,13 @@ public class EstudianteServiceImpl implements IEstudianteService {
 		return estudianteDTO;
 	}
 	
+	@Override
+	public List<EstudianteDTO> findByNoIdentificacionContaining(Integer id){
+		List<EstudianteEntity> listaEntity = servicioAccesoBaseDatos.findBynoIdentificacionContaining(id);
+
+		List<EstudianteDTO> listaDTO = this.modelMapper.map(listaEntity, new TypeToken<List<EstudianteDTO>>() {}.getType());
+		return listaDTO;
+	}
 
 	@Override
 	@Transactional()

@@ -10,4 +10,7 @@ public interface EstudianteRepository extends CrudRepository<EstudianteEntity, I
 
 	public List<EstudianteEntity> findBynoIdentificacion(String noIdentificacion);
 	public List<EstudianteEntity> findByCorreo(String correo);
+
+	public List<EstudianteEntity> findBynoIdentificacionContaining(Integer id);
+
 }
