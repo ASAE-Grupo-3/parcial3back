@@ -88,7 +88,7 @@ public class DocenteServiceImpl implements IDocenteService {
 	private void validarTipoIdandNoId(DocenteDTO docente) {
 		
 		if(this.servicioAccesoBaseDatos.existeNoIdandTipoId(docente.getTipoIdentificacion(), docente.getNoIdentificacion())>=1) {
-			EntidadYaExisteException objExcepcion = new EntidadYaExisteException("ESTUDIANTE con tipoId: "+docente.getTipoIdentificacion()+
+			EntidadYaExisteException objExcepcion = new EntidadYaExisteException("DOCENTE con tipoId: "+docente.getTipoIdentificacion()+
 					" y número Id: "+ docente.getNoIdentificacion()+" existe en la Base De Datos.");
 			throw objExcepcion;
 		}
