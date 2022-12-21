@@ -7,9 +7,9 @@ import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadYaExisteException;
+import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.ReglaNegocioExcepcion;
 import co.edu.unicauca.asae.core.proyecto.models.EstudianteEntity;
 import co.edu.unicauca.asae.core.proyecto.repositories.EstudianteRepository;
-import co.edu.unicauca.asae.core.proyecto.services.DTO.DocenteDTO;
 import co.edu.unicauca.asae.core.proyecto.services.DTO.EstudianteDTO;
 
 import org.modelmapper.ModelMapper;
@@ -68,7 +68,17 @@ public class EstudianteServiceImpl implements IEstudianteService {
 		
 		EstudianteDTO estudianteDTO = null;
 		EstudianteEntity EstudianteEntity = this.modelMapper.map(estudiante, EstudianteEntity.class);
+		if (EstudianteEntity.getObjDireccion() == null) {
+			ReglaNegocioExcepcion objExcepcion = new ReglaNegocioExcepcion("ESTUDIANTE debe tener al menos una direccion");
+				throw objExcepcion;
+		}
+		
 		EstudianteEntity.getObjDireccion().setObjEstudiante(EstudianteEntity);
+
+		if(EstudianteEntity.getTelefonos().size() < 2){
+			ReglaNegocioExcepcion objExcepcion = new ReglaNegocioExcepcion("ESTUDIANTE debe tener al menos dos telefonos");
+				throw objExcepcion;
+		};
 
 		EstudianteEntity.getTelefonos().forEach(objTelefono -> objTelefono.setObjEstudiante(EstudianteEntity));
 
@@ -113,7 +123,19 @@ public class EstudianteServiceImpl implements IEstudianteService {
 	@Transactional(readOnly = false)
 	public EstudianteDTO update(Integer id, EstudianteDTO objEstudianteConDatosNuevos) {
 		EstudianteEntity EstudianteEntity = this.modelMapper.map(objEstudianteConDatosNuevos, EstudianteEntity.class);
-//		EstudianteEntity.getObjDireccion().setObjEstudiante(EstudianteEntity);
+		if (EstudianteEntity.getObjDireccion() == null) {
+			ReglaNegocioExcepcion objExcepcion = new ReglaNegocioExcepcion("ESTUDIANTE debe tener al menos una direccion");
+				throw objExcepcion;
+		}
+		
+		EstudianteEntity.getObjDireccion().setObjEstudiante(EstudianteEntity);
+
+		if(EstudianteEntity.getTelefonos().size() < 2){
+			ReglaNegocioExcepcion objExcepcion = new ReglaNegocioExcepcion("ESTUDIANTE debe tener al menos dos telefonos");
+				throw objExcepcion;
+		};
+		
+		EstudianteEntity.getObjDireccion().setObjEstudiante(EstudianteEntity);
 
 		EstudianteEntity.getTelefonos().forEach(objTelefono -> objTelefono.setObjEstudiante(EstudianteEntity));
 		
