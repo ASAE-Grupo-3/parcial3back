@@ -62,20 +62,10 @@ public class DocenteRestController {
 	}
 
 	@PostMapping("/docentes")
-	public ResponseEntity<?> create(@Valid @RequestBody DocenteDTO cliente) {
+	public DocenteDTO create(@Valid @RequestBody DocenteDTO cliente) {
 		DocenteDTO objDocente = null;
-		HashMap<String, Object> respuestas = new HashMap<>();
-		ResponseEntity objRespuesta;
-		try{
-			objDocente = docenteService.save(cliente);
-			objRespuesta = new ResponseEntity<DocenteDTO>(objDocente, HttpStatus.CREATED);
-		}catch(DataAccessException e){
-			respuestas.put("mensaje", "Error al realizar la insercion del recurso");
-			respuestas.put("Descripcion del error", e.getMessage());
-			objRespuesta = new ResponseEntity<>(respuestas, HttpStatus.BAD_REQUEST);
-		}
-		
-		return objRespuesta;
+		objDocente = docenteService.save(cliente);
+		return objDocente;
 	}
 
 	@PutMapping("/docentes/{id}")
