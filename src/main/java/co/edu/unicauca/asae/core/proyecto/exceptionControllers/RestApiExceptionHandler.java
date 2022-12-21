@@ -19,6 +19,7 @@ import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.Codigo
 import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadNoExisteException;
 import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadYaExisteException;
 import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.Error;
+import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.ErrorAlmacenamientoBDException;
 import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.ErrorUtils;
 import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.ReglaNegocioExcepcion;
 
@@ -89,5 +90,15 @@ public class RestApiExceptionHandler {
         ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException e) {
                 return new ResponseEntity<>("nombre del método y parametros erroneos: " + e.getMessage(),
                                 HttpStatus.BAD_REQUEST);
+        }
+
+        @ExceptionHandler(ErrorAlmacenamientoBDException.class)
+        public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+                        final ErrorAlmacenamientoBDException ex, final Locale locale) {
+                final Error error = ErrorUtils
+                                .crearError(CodigoError.Violacion_almacenamiento_DB.getCodigo(), ex.formatException(),
+                                                HttpStatus.NOT_ACCEPTABLE.value())
+                                .setUrl(req.getRequestURL().toString()).setMetodo(req.getMethod());
+                return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
         }
 }
