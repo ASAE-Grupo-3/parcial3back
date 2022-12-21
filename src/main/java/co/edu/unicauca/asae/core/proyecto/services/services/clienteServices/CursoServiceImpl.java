@@ -1,6 +1,5 @@
 package co.edu.unicauca.asae.core.proyecto.services.services.clienteServices;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +11,6 @@ import co.edu.unicauca.asae.core.proyecto.models.AsignaturaEntity;
 import co.edu.unicauca.asae.core.proyecto.models.CursoEntity;
 import co.edu.unicauca.asae.core.proyecto.repositories.AsignaturaRepository;
 import co.edu.unicauca.asae.core.proyecto.repositories.CursoRepository;
-import co.edu.unicauca.asae.core.proyecto.services.DTO.AsignaturaDTO;
 import co.edu.unicauca.asae.core.proyecto.services.DTO.CursoDTO;
 
 import org.modelmapper.ModelMapper;
@@ -62,6 +60,8 @@ public class CursoServiceImpl implements ICursoService {
 	@Transactional()
 	public CursoDTO save(CursoDTO cursoDTO) {
 
+		validarCursosExistentes(cursoDTO);
+		validarIdCurso(cursoDTO);
 		AsignaturaEntity asignatura = this.servicioAsignatura.findById(cursoDTO.getObjAsignatura().getIdAsignatura()).orElse(null);
 		CursoDTO cursoRespuesta = null;
 		if (cursoDTO.getObjAsignatura()!=null && asignatura!=null) {
@@ -76,6 +76,36 @@ public class CursoServiceImpl implements ICursoService {
 		}
 		
 		return cursoRespuesta;
+	}
+
+	
+	private void validarIdCurso(CursoDTO curso) {
+		if (curso.getIdCurso()!=null) {
+			if (this.servicioAccesoBaseDatos.existsById(curso.getIdCurso())) {
+				EntidadYaExisteException objExcepcion = new EntidadYaExisteException("CURSO con IdCurso: "
+			+curso.getIdCurso()+" existe en la Base De Datos.");
+				throw objExcepcion;
+			}
+		}
+	}
+
+	private void validarCursosExistentes(CursoDTO cursos) {
+		List<CursoEntity> cursosEntityRequest = this.servicioAccesoBaseDatos.findByNombre(cursos.getNombre());
+		
+		if (!cursosEntityRequest.isEmpty()) {
+			boolean isCurso = false;
+			for (CursoEntity objCurso : cursosEntityRequest) {
+				if (objCurso.getNombre().equals(cursos.getNombre())) {
+					isCurso = true;
+					break;
+				}
+			}
+			if (isCurso) {
+				EntidadYaExisteException objExcepcion = new EntidadYaExisteException("El Curso: "+cursos.getNombre()+
+						" ya existe en la Base De Datos.");
+				throw objExcepcion;
+			}
+		}
 	}
 
 	@Override

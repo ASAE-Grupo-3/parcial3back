@@ -33,7 +33,7 @@ INSERT INTO `asignatura` (`idAsignatura`, `nombre`) VALUES (null, 'Ingeniería d
 INSERT INTO `docente_asignatura`(`idPersona`, `idAsignatura`) VALUES(1, 1);
 INSERT INTO `docente_asignatura` (`idPersona`, `idAsignatura`) VALUES (2, 2); 
 
-INSERT INTO `curso` (`idCurso`, `nombre`, `periodo`, `idAsignatura`) VALUES (null, 'B', 1,1); 
+INSERT INTO `curso` (`idCurso`, `nombre`, `periodo`, `idAsignatura`) VALUES (null, 'CURSO B', 1,1); 
 INSERT INTO `curso` (`idCurso`, `nombre`, `periodo`, `idAsignatura`) VALUES (null, 'A', 2,2); 
 
 
