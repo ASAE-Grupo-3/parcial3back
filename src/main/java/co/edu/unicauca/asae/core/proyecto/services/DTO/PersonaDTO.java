@@ -27,11 +27,11 @@ public class PersonaDTO {
 	private String tipoIdentificacion;
 	@NotNull(message = "{persona.nombres.null}")
 	@NotEmpty(message = "{persona.nombres.empty}")
-	@Size(min=3, max = 50, message = "{persona.nombres.size}")
+	@Size(min=4, max = 49, message = "{persona.nombres.size}")
 	private String nombres;
 	@NotNull(message = "{persona.apellidos.null}")
 	@NotEmpty(message = "{persona.apellidos.empty}")
-	@Size(min=3, max = 50, message = "{persona.apellidos.size}")
+	@Size(min=4, max = 49, message = "{persona.apellidos.size}")
 	private String apellidos;
 	
 }
