@@ -36,26 +36,10 @@ public class AsignaturaRestController {
 	}
 
 	@GetMapping("/asignaturas/{id}")
-	public ResponseEntity<?> show(@Positive(message = "{consultar.recurso.identificacion}") @PathVariable Integer id) {
-		AsignaturaDTO objAsignatura = null;
-		HashMap<String, Object> respuestas = new HashMap<>();
-		ResponseEntity objRespuesta;
-
-		try{
-			objAsignatura = asignaturaService.findById(id);
-			if(objAsignatura == null){
-				respuestas.put("mensaje", "La asignatura con el ID "+id+" no existe en la bd");
-				objRespuesta = new ResponseEntity<>(respuestas, HttpStatus.NOT_FOUND);
-			}else{
-				objRespuesta = new ResponseEntity<>(objAsignatura, HttpStatus.OK);
-			}
-		}catch(DataAccessException e){
-			respuestas.put("mensaje", "Error al realizar la consulta en la base de datos");
-			respuestas.put("Descripcion del error", e.getMessage());
-			objRespuesta = new ResponseEntity<>(respuestas, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
-		return objRespuesta;
+	public AsignaturaDTO show(@Positive(message = "{consultar.recurso.identificacion}") @PathVariable Integer id) {
+		AsignaturaDTO objasignatura = null;
+		objasignatura = asignaturaService.findById(id);
+		return objasignatura;
 	}
 
 	@PostMapping("/asignaturas")

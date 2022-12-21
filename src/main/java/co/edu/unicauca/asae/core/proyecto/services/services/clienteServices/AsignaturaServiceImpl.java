@@ -42,9 +42,18 @@ public class AsignaturaServiceImpl implements IAsignaturaService {
 	@Transactional(readOnly = true)
 	public AsignaturaDTO findById(Integer id) {
 		Optional<AsignaturaEntity> optional = this.servicioAccesoBaseDatos.findById(id);
-		AsignaturaEntity user = optional.get();
-		System.out.println("antes de la consulta");
-		AsignaturaDTO asignaturaDTO = this.modelMapper.map(user, AsignaturaDTO.class);
+		AsignaturaDTO asignaturaDTO = null;
+		if (optional.isPresent()) {
+			AsignaturaEntity user = optional.get();
+			System.out.println("antes de la consulta");
+			asignaturaDTO = this.modelMapper.map(user, AsignaturaDTO.class);
+		}else {
+			EntidadNoExisteException objException = new EntidadNoExisteException("Asignatura con idAsignatura: "
+					+ id+" no existe en la Base De Datos.");
+			throw objException;
+		}
+		
+		
 		return asignaturaDTO;
 	}
 
