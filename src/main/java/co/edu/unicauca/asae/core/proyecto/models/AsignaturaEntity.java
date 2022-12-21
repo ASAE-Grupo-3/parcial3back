@@ -38,7 +38,7 @@ public class AsignaturaEntity implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idAsignatura;
-	@Column(name = "nombre", nullable = false, length = 150)
+	@Column(name = "nombre", nullable = false, length = 150, unique = true)
 	private String nombre;
 
 	@ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)

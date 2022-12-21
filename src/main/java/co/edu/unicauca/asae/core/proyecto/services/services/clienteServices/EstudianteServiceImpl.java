@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadNoExisteException;
 import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadYaExisteException;
 import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.ReglaNegocioExcepcion;
 import co.edu.unicauca.asae.core.proyecto.models.EstudianteEntity;
@@ -161,6 +162,11 @@ public class EstudianteServiceImpl implements IEstudianteService {
 		if (this.servicioAccesoBaseDatos.existsById(id)) {
 			this.servicioAccesoBaseDatos.deleteById(id);
 			bandera = !this.servicioAccesoBaseDatos.existsById(id);
+		}
+		else {
+			EntidadNoExisteException objException = new EntidadNoExisteException("Estudiante con idPersona: "
+					+ id+" no existe en la Base De Datos.");
+			throw objException;
 		}
 
 		return bandera;

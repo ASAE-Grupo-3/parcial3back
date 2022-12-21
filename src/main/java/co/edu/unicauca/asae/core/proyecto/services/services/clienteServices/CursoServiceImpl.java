@@ -93,11 +93,11 @@ public class CursoServiceImpl implements ICursoService {
 			this.servicioAccesoBaseDatos.deleteById(id);
 			estado = !this.servicioAccesoBaseDatos.existsById(id);
 		}
-//		else {
-//			EntidadNoExisteException objException = new EntidadNoExisteException("Curso con idCurso: "
-//					+ id+" no existe en la Base De Datos.");
-//			throw objException;
-//		}
+		else {
+			EntidadNoExisteException objException = new EntidadNoExisteException("Curso con idCurso: "
+					+ id+" no existe en la Base De Datos.");
+			throw objException;
+		}
 		return estado;
 	}
 }
