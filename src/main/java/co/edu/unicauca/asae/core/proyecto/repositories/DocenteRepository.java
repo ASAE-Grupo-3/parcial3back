@@ -13,4 +13,5 @@ public interface DocenteRepository extends CrudRepository<DocenteEntity,Integer>
 	
 	@Query(value = "SELECT count(*) FROM `docente` e WHERE e.tipoIdentificacion =:tipoId and e.noIdentificacion =:noId", nativeQuery = true)
 	public int existeNoIdandTipoId(@Param("tipoId") String tipoIdentificacion, @Param("noId") String noIdentificacion);
+
 }

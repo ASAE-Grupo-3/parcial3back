@@ -202,4 +202,25 @@ public class EstudianteServiceImpl implements IEstudianteService {
 		return bandera;
 	}
 
+	@Override
+	public List<EstudianteDTO> BuscarPorApellido(String apellido) {
+		List<EstudianteEntity> listaEntity = servicioAccesoBaseDatos.findByApellidosIgnoreCase(apellido);
+		List<EstudianteDTO> listaDTO = this.modelMapper.map(listaEntity, new TypeToken<List<EstudianteDTO>>() {}.getType());
+		return listaDTO;
+	}
+
+	@Override
+	public List<EstudianteDTO> BuscarPorNombre(String nombre) {
+		List<EstudianteEntity> listaEntity = servicioAccesoBaseDatos.findByNombresIgnoreCase(nombre);
+		List<EstudianteDTO> listaDTO = this.modelMapper.map(listaEntity, new TypeToken<List<EstudianteDTO>>() {}.getType());
+		return listaDTO;
+	}
+
+	@Override
+	public List<EstudianteDTO> BuscarPorCorreo(String correo) {
+		List<EstudianteEntity> listaEntity = servicioAccesoBaseDatos.findByCorreoIgnoreCase(correo);
+		List<EstudianteDTO> listaDTO = this.modelMapper.map(listaEntity, new TypeToken<List<EstudianteDTO>>() {}.getType());
+		return listaDTO;
+	}
+
 }
