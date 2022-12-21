@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.unicauca.asae.core.proyecto.exceptionControllers.exceptions.EntidadYaExisteException;
 import co.edu.unicauca.asae.core.proyecto.models.DocenteEntity;
 import co.edu.unicauca.asae.core.proyecto.repositories.DocenteRepository;
 import co.edu.unicauca.asae.core.proyecto.services.DTO.DocenteDTO;
@@ -53,15 +54,37 @@ public class DocenteServiceImpl implements IDocenteService {
 
 	@Override
 	@Transactional()
-	public DocenteDTO save(DocenteDTO cliente) {
-
-		DocenteEntity docenteEntity = this.modelMapper.map(cliente, DocenteEntity.class);
+	public DocenteDTO save(DocenteDTO docente) {
+		
+		this.validarTipoIdandNoId(docente);
+		
+		DocenteEntity docenteEntity = this.modelMapper.map(docente, DocenteEntity.class);
 
 		DocenteEntity objDocenteEntity = this.servicioAccesoBaseDatos.save(docenteEntity);
 		DocenteDTO DocenteDTO = this.modelMapper.map(objDocenteEntity, DocenteDTO.class);
 		return DocenteDTO;
 	}
 
+	private void validarTipoIdandNoId(DocenteDTO estudiante) {
+		List<DocenteEntity> docentesEntityRequest = this.servicioAccesoBaseDatos.findBynoIdentificacion(estudiante.getNoIdentificacion());
+		
+		if (!docentesEntityRequest.isEmpty()) {
+			boolean isDocente = false;
+			for (DocenteEntity objDocente : docentesEntityRequest) {
+				if (objDocente.getNoIdentificacion().equals(estudiante.getNoIdentificacion())
+						&& objDocente.getTipoIdentificacion().equals(estudiante.getTipoIdentificacion())) {
+					isDocente = true;
+					break;
+				}
+			}
+			if (isDocente) {
+				EntidadYaExisteException objExcepcion = new EntidadYaExisteException("DOCENTE con tipoId: "+estudiante.getTipoIdentificacion()+
+						" y número Id: "+ estudiante.getNoIdentificacion()+" existe en la Base De Datos.");
+				throw objExcepcion;
+			}
+		}
+	}
+	
 	@Override
 	@Transactional()
 	public DocenteDTO update(Integer id, DocenteDTO objDocenteConDatosNuevos) {

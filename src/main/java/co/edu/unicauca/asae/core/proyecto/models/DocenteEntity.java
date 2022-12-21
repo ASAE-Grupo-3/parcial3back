@@ -24,7 +24,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Docente")
+@Table(name = "Docente",uniqueConstraints = { @UniqueConstraint(columnNames = { "noIdentificacion", "tipoIdentificacion" }) })
 public class DocenteEntity extends PersonaEntity implements Serializable{
 
 	/**

@@ -62,17 +62,10 @@ public class EstudianteServiceImpl implements IEstudianteService {
 	@Override
 	@Transactional()
 	public EstudianteDTO save(EstudianteDTO estudiante) {
-
+		
+		validarTipoIdandNoId(estudiante);
+		
 		EstudianteDTO estudianteDTO = null;
-		EstudianteEntity estudianteEntityRequest = this.servicioAccesoBaseDatos.findBynoIdentificacion(estudiante.getNoIdentificacion()).orElse(null);
-		
-		if (estudianteEntityRequest!=null && estudianteEntityRequest.getNoIdentificacion().equals(estudiante.getNoIdentificacion())
-				&& estudianteEntityRequest.getTipoIdentificacion().equals(estudiante.getTipoIdentificacion())) {
-			EntidadYaExisteException objExcepcion = new EntidadYaExisteException("Estudiante con tipoId: "+estudiante.getTipoIdentificacion()+
-					" y número Id: "+ estudiante.getNoIdentificacion()+" existe en la Base De Datos.");
-			throw objExcepcion;
-		}
-		
 		EstudianteEntity EstudianteEntity = this.modelMapper.map(estudiante, EstudianteEntity.class);
 		EstudianteEntity.getObjDireccion().setObjEstudiante(EstudianteEntity);
 
@@ -82,6 +75,26 @@ public class EstudianteServiceImpl implements IEstudianteService {
 		estudianteDTO = this.modelMapper.map(objEstudianteEntity, EstudianteDTO.class);
 		
 		return estudianteDTO;
+	}
+	
+	private void validarTipoIdandNoId(EstudianteDTO estudiante) {
+		List<EstudianteEntity> docentesEntityRequest = this.servicioAccesoBaseDatos.findBynoIdentificacion(estudiante.getNoIdentificacion());
+		
+		if (!docentesEntityRequest.isEmpty()) {
+			boolean isEstudiante = false;
+			for (EstudianteEntity objEstudiante : docentesEntityRequest) {
+				if (objEstudiante.getNoIdentificacion().equals(estudiante.getNoIdentificacion())
+						&& objEstudiante.getTipoIdentificacion().equals(estudiante.getTipoIdentificacion())) {
+					isEstudiante = true;
+					break;
+				}
+			}
+			if (isEstudiante) {
+				EntidadYaExisteException objExcepcion = new EntidadYaExisteException("ESTUDIANTE con tipoId: "+estudiante.getTipoIdentificacion()+
+						" y número Id: "+ estudiante.getNoIdentificacion()+" existe en la Base De Datos.");
+				throw objExcepcion;
+			}
+		}
 	}
 
 	@Override
