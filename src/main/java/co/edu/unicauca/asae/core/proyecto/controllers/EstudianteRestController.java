@@ -9,6 +9,7 @@ import javax.validation.constraints.Positive;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ import co.edu.unicauca.asae.core.proyecto.services.services.clienteServices.IEst
 @RestController
 @RequestMapping("/api")
 @Validated
+@CrossOrigin(origins = {"http://localhost:4200/"})
 public class EstudianteRestController {
 
 	@Autowired
